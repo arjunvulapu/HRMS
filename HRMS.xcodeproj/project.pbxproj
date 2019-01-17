@@ -15,6 +15,9 @@
 		1818791521F0B221007B1F09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818791421F0B221007B1F09 /* main.m */; };
 		1818791F21F0B222007B1F09 /* HRMSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818791E21F0B222007B1F09 /* HRMSTests.m */; };
 		1818792A21F0B222007B1F09 /* HRMSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818792921F0B222007B1F09 /* HRMSUITests.m */; };
+		BB389DAF05B48CB3A0F9DCD8 /* libPods-HRMSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C65443135BF3245DB2E935D /* libPods-HRMSUITests.a */; };
+		C150C464D0FD40C63CC7A2A3 /* libPods-HRMSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEFA6CB6322CB59419357B8 /* libPods-HRMSTests.a */; };
+		FF6BB848ECA4AA990E73A7F2 /* libPods-HRMS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4772AE2F6595A3FE096EC1B /* libPods-HRMS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A56F53BC323124F77B9CFFF /* Pods-HRMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRMS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HRMS/Pods-HRMS.debug.xcconfig"; sourceTree = "<group>"; };
 		1818790221F0B20F007B1F09 /* HRMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HRMS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1818790521F0B210007B1F09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1818790621F0B210007B1F09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +55,14 @@
 		1818792521F0B222007B1F09 /* HRMSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HRMSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1818792921F0B222007B1F09 /* HRMSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HRMSUITests.m; sourceTree = "<group>"; };
 		1818792B21F0B222007B1F09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31A260117E56E71200484671 /* Pods-HRMSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRMSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HRMSTests/Pods-HRMSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		35889F7C1C53C0CB9E87803A /* Pods-HRMSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRMSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HRMSUITests/Pods-HRMSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6C65443135BF3245DB2E935D /* libPods-HRMSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HRMSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		731FB33B403605EA50A2F16F /* Pods-HRMS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRMS.release.xcconfig"; path = "Pods/Target Support Files/Pods-HRMS/Pods-HRMS.release.xcconfig"; sourceTree = "<group>"; };
+		BDEFA6CB6322CB59419357B8 /* libPods-HRMSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HRMSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9D21E01310A62F92BDF65E4 /* Pods-HRMSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRMSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HRMSUITests/Pods-HRMSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F05A5AFC14802E2060026C03 /* Pods-HRMSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRMSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HRMSTests/Pods-HRMSTests.release.xcconfig"; sourceTree = "<group>"; };
+		F4772AE2F6595A3FE096EC1B /* libPods-HRMS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HRMS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF6BB848ECA4AA990E73A7F2 /* libPods-HRMS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C150C464D0FD40C63CC7A2A3 /* libPods-HRMSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB389DAF05B48CB3A0F9DCD8 /* libPods-HRMSUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +100,8 @@
 				1818791D21F0B222007B1F09 /* HRMSTests */,
 				1818792821F0B222007B1F09 /* HRMSUITests */,
 				1818790321F0B20F007B1F09 /* Products */,
+				5C56619705FEEFEC60C819B0 /* Pods */,
+				AA55D499C69BBE89DF7BC88A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,6 +149,29 @@
 			path = HRMSUITests;
 			sourceTree = "<group>";
 		};
+		5C56619705FEEFEC60C819B0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0A56F53BC323124F77B9CFFF /* Pods-HRMS.debug.xcconfig */,
+				731FB33B403605EA50A2F16F /* Pods-HRMS.release.xcconfig */,
+				31A260117E56E71200484671 /* Pods-HRMSTests.debug.xcconfig */,
+				F05A5AFC14802E2060026C03 /* Pods-HRMSTests.release.xcconfig */,
+				35889F7C1C53C0CB9E87803A /* Pods-HRMSUITests.debug.xcconfig */,
+				E9D21E01310A62F92BDF65E4 /* Pods-HRMSUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AA55D499C69BBE89DF7BC88A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4772AE2F6595A3FE096EC1B /* libPods-HRMS.a */,
+				BDEFA6CB6322CB59419357B8 /* libPods-HRMSTests.a */,
+				6C65443135BF3245DB2E935D /* libPods-HRMSUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,6 +179,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1818792E21F0B222007B1F09 /* Build configuration list for PBXNativeTarget "HRMS" */;
 			buildPhases = (
+				D9503BBCDCA4FBB5912BFA45 /* [CP] Check Pods Manifest.lock */,
 				181878FE21F0B20F007B1F09 /* Sources */,
 				181878FF21F0B20F007B1F09 /* Frameworks */,
 				1818790021F0B20F007B1F09 /* Resources */,
@@ -156,6 +197,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1818793121F0B222007B1F09 /* Build configuration list for PBXNativeTarget "HRMSTests" */;
 			buildPhases = (
+				3530182019CC611F2FD357A6 /* [CP] Check Pods Manifest.lock */,
 				1818791621F0B222007B1F09 /* Sources */,
 				1818791721F0B222007B1F09 /* Frameworks */,
 				1818791821F0B222007B1F09 /* Resources */,
@@ -174,6 +216,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1818793421F0B222007B1F09 /* Build configuration list for PBXNativeTarget "HRMSUITests" */;
 			buildPhases = (
+				20E398258041E1111FBA0416 /* [CP] Check Pods Manifest.lock */,
 				1818792121F0B222007B1F09 /* Sources */,
 				1818792221F0B222007B1F09 /* Frameworks */,
 				1818792321F0B222007B1F09 /* Resources */,
@@ -256,6 +299,75 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		20E398258041E1111FBA0416 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HRMSUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3530182019CC611F2FD357A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HRMSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9503BBCDCA4FBB5912BFA45 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HRMS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		181878FE21F0B20F007B1F09 /* Sources */ = {
@@ -433,6 +545,7 @@
 		};
 		1818792F21F0B222007B1F09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A56F53BC323124F77B9CFFF /* Pods-HRMS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -450,6 +563,7 @@
 		};
 		1818793021F0B222007B1F09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 731FB33B403605EA50A2F16F /* Pods-HRMS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -467,6 +581,7 @@
 		};
 		1818793221F0B222007B1F09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31A260117E56E71200484671 /* Pods-HRMSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -486,6 +601,7 @@
 		};
 		1818793321F0B222007B1F09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F05A5AFC14802E2060026C03 /* Pods-HRMSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -505,6 +621,7 @@
 		};
 		1818793521F0B222007B1F09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35889F7C1C53C0CB9E87803A /* Pods-HRMSUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WV96477242;
@@ -523,6 +640,7 @@
 		};
 		1818793621F0B222007B1F09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9D21E01310A62F92BDF65E4 /* Pods-HRMSUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WV96477242;
