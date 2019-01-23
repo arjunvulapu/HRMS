@@ -1,22 +1,25 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'HRMS' do
+target 'HRMSystem' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
+use_frameworks!
+  # Pods for HRMSystem
+pod 'IQKeyboardManager'
+pod 'JVFloatLabeledTextField'
 
-  # Pods for HRMS
-  pod 'AFNetworking'
-
-
-  target 'HRMSTests' do
+  target 'HRMSystemTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'HRMSUITests' do
+  target 'HRMSystemUITests' do
     inherit! :search_paths
     # Pods for testing
   end
 
 end
+
+
+

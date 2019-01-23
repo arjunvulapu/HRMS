@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoryboardExampleViewController">
+            <connections>
+                <outlet property="backgroundview" destination="cID-O8-l5h" id="zg5-fU-354"/>
+                <outlet property="calendar" destination="lZr-WT-8dn" id="usJ-Te-ZSl"/>
+                <outlet property="navItem" destination="9Sy-8q-S8m" id="96k-NR-mLf"/>
+                <outlet property="view" destination="d8b-bW-sc8" id="rMs-CR-HKy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="d8b-bW-sc8">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="385"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cID-O8-l5h">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="385"/>
+                    <color key="backgroundColor" red="0.2328885198" green="0.48236101869999998" blue="0.6495161653" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tbg-OO-x4N">
+                    <rect key="frame" x="0.0" y="10" width="343" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="barTintColor" red="0.2328885198" green="0.48236101869999998" blue="0.6495161653" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <textAttributes key="titleTextAttributes">
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </textAttributes>
+                    <items>
+                        <navigationItem title="Title" id="9Sy-8q-S8m">
+                            <barButtonItem key="leftBarButtonItem" image="close.png" id="QiC-z0-PTW">
+                                <connections>
+                                    <action selector="close:" destination="-1" id="s8W-ba-Eko"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" id="wMa-Qq-kch"/>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZr-WT-8dn" customClass="FSCalendar">
+                    <rect key="frame" x="10" y="64" width="323" height="310"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="323" id="02K-vc-gXK"/>
+                        <constraint firstAttribute="height" constant="310" id="xuB-2U-ycq"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fakedSelectedDay">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="useVeryShortWeekdaySymbols" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="pagingEnabled" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="scrollEnabled" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="fakeSubtitles" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="showsPlaceholders" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="3GA-0P-4An"/>
+                        <outlet property="delegate" destination="-1" id="blH-5x-V4C"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.88235294117647056" green="0.87450980392156863" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="lZr-WT-8dn" firstAttribute="centerX" secondItem="d8b-bW-sc8" secondAttribute="centerX" id="0AE-Cl-tQA"/>
+                <constraint firstItem="cID-O8-l5h" firstAttribute="centerX" secondItem="d8b-bW-sc8" secondAttribute="centerX" id="5iB-yg-DIV"/>
+                <constraint firstItem="Tbg-OO-x4N" firstAttribute="top" secondItem="d8b-bW-sc8" secondAttribute="top" constant="10" id="Kxj-Yn-8it"/>
+                <constraint firstItem="lZr-WT-8dn" firstAttribute="top" secondItem="d8b-bW-sc8" secondAttribute="top" constant="64" id="Sgo-ci-2vM"/>
+                <constraint firstItem="Tbg-OO-x4N" firstAttribute="leading" secondItem="d8b-bW-sc8" secondAttribute="leading" id="VIH-Mb-69d"/>
+                <constraint firstItem="cID-O8-l5h" firstAttribute="width" secondItem="d8b-bW-sc8" secondAttribute="width" id="YKT-AE-fLT"/>
+                <constraint firstItem="cID-O8-l5h" firstAttribute="height" secondItem="d8b-bW-sc8" secondAttribute="height" id="fq7-1E-CUK"/>
+                <constraint firstItem="cID-O8-l5h" firstAttribute="centerY" secondItem="d8b-bW-sc8" secondAttribute="centerY" id="tQF-Wv-yYr"/>
+                <constraint firstAttribute="trailing" secondItem="Tbg-OO-x4N" secondAttribute="trailing" id="wId-i1-zML"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="163.5" y="57.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close.png" width="30" height="30"/>
+    </resources>
+</document>
