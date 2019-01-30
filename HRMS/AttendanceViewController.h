@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet FSCalendar *calanderView;
 @property (weak, nonatomic) IBOutlet UICollectionView *attendanceCollectionView;
+@property (weak, nonatomic) IBOutlet UIButton *showingDateBtn;
+- (IBAction)showingDAteBtnAction:(id)sender;
 
 @end
 

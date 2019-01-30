@@ -282,9 +282,9 @@
 
 - (UIColor *)colorForCellFill
 {
-    if (self.selected) {
-        return self.preferredFillSelectionColor ?: [self colorForCurrentStateInDictionary:_appearance.backgroundColors];
-    }
+//    if (self.selected) {
+//        return self.preferredFillSelectionColor ?: [self colorForCurrentStateInDictionary:_appearance.backgroundColors];
+//    }
     return self.preferredFillDefaultColor ?: [self colorForCurrentStateInDictionary:_appearance.backgroundColors];
 }
 

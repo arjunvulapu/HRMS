@@ -38,7 +38,20 @@
 #define APPLYLEAVE @"leave.php"
 #define CONTACTUS @"contact.php"
 #define ATTENDANCE @"attendance.php"
+#define ATTENDANCEMONTHSLUST @"attendance_avail.php"
 #define USERLEAVES @"leaves.php"
+#define HRLEAVES @"leaves_hr.php"
+#define EMPLOYEELOCATIOn @"employee_location.php"
+#define LEAVECANCEL @"leave_cancel.php"
+#define HRLEAVEACTION @"leave_approve.php"
+#define PAGE_REGISTER_TOKEN @"token-register.php"
+#define PROJECTS @"projects.php"
+#define ADDTASK @"task.php"
+#define TASKLIST @"tasks.php"
+#define TASKAPPROVE @"task_approve.php"
+#define ADDTOWORKSHEET @"worksheet.php"
+#define WORKSHEETLIST @"worksheetss.php"
+
 #define SYSTEM_VERSION_GREATER_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 
 #endif

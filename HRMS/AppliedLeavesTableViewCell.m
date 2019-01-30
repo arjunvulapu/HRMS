@@ -21,4 +21,20 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)cancelBtnAction:(id)sender {
+    if(self.Cancel){
+        self.Cancel();
+    }
+}
+- (IBAction)acceptBtnAction:(id)sender {
+    if(self.acceptBtnAction){
+        self.acceptBtnAction();
+    }
+}
+
+- (IBAction)hrCancelledBtnAction:(id)sender {
+    if(self.hrCancelBtnAction){
+        self.hrCancelBtnAction();
+    }
+}
 @end

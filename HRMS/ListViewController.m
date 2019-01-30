@@ -8,9 +8,11 @@
 
 #import "ListViewController.h"
 #import "AppliedLeavesTableViewCell.h"
+#import "SRAlertView/SRAlertView.h"
 @interface ListViewController ()
 {
     NSMutableArray *holidaysList;
+    NSString *cancelStr;
 }
 @end
 
@@ -24,12 +26,23 @@
     // Do any additional setup after loading the view.
     holidaysList=[[NSMutableArray alloc] init];
     [self addbackground:self.backgroundView];
+    
+    
     [self makePostCallForPage:USERLEAVES withParams:@{@"employee_id":[Utils loggedInUserIdStr]} withRequestCode:10];
 }
 -(void)parseResult:(id)result withCode:(int)reqeustCode{
     if(reqeustCode==10){
         holidaysList=result;
         _holidaysTableView.reloadData;
+    }else if(reqeustCode==11){
+        if ([[result valueForKey:@"status"] isEqualToString:@"Failure"]) {
+            NSString *str=[result valueForKey:@"message"];
+            [self showErrorAlertWithMessage:Localized(str)];
+        } else {
+            [self makePostCallForPage:USERLEAVES withParams:@{@"employee_id":[Utils loggedInUserIdStr]} withRequestCode:10];
+ 
+        }
+
     }
 
 }
@@ -61,15 +74,36 @@
     
     AppliedLeavesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AppliedLeavesTableViewCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    cell.cancelBtn.layer.cornerRadius=10;
+    cell.cancelBtn.clipsToBounds=YES;
     cell.backGroundView.layer.cornerRadius=10;
     cell.backGroundView.clipsToBounds=YES;
+    cell.descrptiontxView.layer.cornerRadius=10;
+    cell.descrptiontxView.clipsToBounds=YES;
     NSDictionary *dict=[holidaysList objectAtIndex:indexPath.row];
-    cell.leaveFromToLbl.text=[NSString stringWithFormat:@"%@-%@",[dict valueForKey:@"start_date"],[dict valueForKey:@"end_date"]];
-    cell.leaveStatus.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"cur_status"]];
+    cell.leaveFromToLbl.text=[NSString stringWithFormat:@": %@",[dict valueForKey:@"date"]];
+    cell.leaveStatus.text=[NSString stringWithFormat:@": %@",[dict valueForKey:@"cur_status"]];
+    if([[dict valueForKey:@"cur_status"] isEqualToString:@"Cancelled"]){
+        [cell.cancelBtn setHidden:YES];
+        cell.textViewBottom.constant=8;
+    }else{
+        [cell.cancelBtn setHidden:NO];
+        cell.textViewBottom.constant=46;
+
+    }
     cell.leaveType.text=@"Leave Type";
-    cell.leaveTypeRLbl.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"leave_type"]];
-    cell.descrptiontxView.text = [NSString stringWithFormat:@"Reason:%@",[dict valueForKey:@"description"]];
+    NSString *leaveRStr=[dict valueForKey:@"leave_type"];
+    NSString *duRStr=[dict valueForKey:@"duration"];
+    NSString *dusRStr=[dict valueForKey:@"duration_shift"];
+    if(duRStr.length>0){
+        leaveRStr=[NSString  stringWithFormat:@"%@-%@",leaveRStr,duRStr];
+        if(dusRStr.length>0){
+            leaveRStr=[NSString  stringWithFormat:@"%@,%@",leaveRStr,dusRStr];
+        }
+    }
+    
+    cell.leaveTypeRLbl.text=[NSString stringWithFormat:@": %@",leaveRStr];
+    cell.descrptiontxView.text = [NSString stringWithFormat:@"Reason: %@",[dict valueForKey:@"description"]];
 //    cell.leaveFromToLbl.textAlignment=NSTextAlignmentCenter;
 //    cell.leaveStatus.textAlignment=NSTextAlignmentCenter;
 //    cell.leaveType.textAlignment=NSTextAlignmentCenter;
@@ -106,7 +140,51 @@
         cell.leaveTypeRLbl.textColor=[UIColor blackColor];
         cell.descrptiontxView.textColor=[UIColor blackColor];
     }
-   
+    cell.Cancel = ^{
+        self->cancelStr=[NSString stringWithFormat:@"%@",[dict valueForKey:@"id"]];
+//        UIAlertView *alert = [[UIAlertView alloc]
+//                              initWithTitle:@"Please Conform To Cancel"
+//                              message:nil
+//                              delegate:self
+//                              cancelButtonTitle:@"Cancel"
+//                              otherButtonTitles:@"Sure", nil];
+//        [alert show];
+        
+        
+        SRAlertView *alertView = [SRAlertView sr_alertViewWithTitle:@"HRMSystem"
+                                                               icon:nil
+                                                            message:@"Please Conform To Cancel"
+                                                    leftActionTitle:@"Sure"
+                                                   rightActionTitle:@"Cancel"
+                                                     animationStyle:SRAlertViewAnimationZoomSpring
+                                                           delegate:self];
+        [alertView show];
+       // [self makePostCallForPage:LEAVECANCEL withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_id":[dict valueForKey:@"id"]} withRequestCode:11];
+
+    };
+    cell.hrView.hidden=YES;
+
+    cell.acceptBtnAction = ^{
+        SRAlertView *alertView = [SRAlertView sr_alertViewWithTitle:@"HRMSystem"
+                                                               icon:nil
+                                                            message:@"Please Conform To Accept"
+                                                    leftActionTitle:@"Sure"
+                                                   rightActionTitle:@"Cancel"
+                                                     animationStyle:SRAlertViewAnimationZoomSpring
+                                                           delegate:self];
+        [alertView show];
+        
+    };
+    cell.hrCancelBtnAction  = ^{
+        SRAlertView *alertView = [SRAlertView sr_alertViewWithTitle:@"HRMSystem"
+                                                               icon:nil
+                                                            message:@"Please Conform To Reject"
+                                                    leftActionTitle:@"Sure"
+                                                   rightActionTitle:@"Cancel"
+                                                     animationStyle:SRAlertViewAnimationZoomSpring
+                                                           delegate:self];
+        [alertView show];
+    };
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -114,5 +192,24 @@
     
     return UITableViewAutomaticDimension;
     
+}
+
+- (void)alertView:(UIAlertView *)alertView
+clickedButtonAtIndex:(NSInteger) buttonIndex{
+    
+    if (buttonIndex == 1) {
+        // Do it!
+         [self makePostCallForPage:LEAVECANCEL withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_id":cancelStr} withRequestCode:11];
+
+    } else {
+        // Cancel
+    }
+}
+- (void)alertViewDidSelectAction:(SRAlertViewActionType)actionType {
+    NSLog(@"%zd", actionType);
+    if(actionType==SRAlertViewActionTypeLeft){
+        [self makePostCallForPage:LEAVECANCEL withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_id":cancelStr} withRequestCode:11];
+
+    }
 }
 @end

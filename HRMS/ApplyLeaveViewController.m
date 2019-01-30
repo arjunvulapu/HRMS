@@ -10,7 +10,8 @@
 #import "StoryboardExampleViewController.h"
 #import "UIViewController+MJPopupViewController.h"
 #import "LeaveTypeCollectionViewCell.h"
-@interface ApplyLeaveViewController ()
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+@interface ApplyLeaveViewController ()<PopViewControllerDelegate>
 {
     NSMutableArray *leaveTypes;
     NSDictionary *selectedleaveType;
@@ -27,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self addbackground:self.backgroundView];
-    
+    numberOfDays=1;
     self.startDateTxtField.text=@"";
     self.endDateTxtField.text=@"";
     self.typeOfLeave.text=@"";
@@ -59,7 +60,7 @@
     self.navigationController.navigationBar.translucent =YES;
     self.tabBarController.navigationItem.title=@"Apply Leave";
     self.numberOfLeavesLbl.text=@"";
-    [self makePostCallForPage:LEAVETYPES withParams:@{} withRequestCode:12];
+    [self makePostCallForPage:LEAVETYPES withParams:@{@"employee_id":[Utils loggedInUserIdStr]} withRequestCode:12];
     _leaveTypeSegment.selectedSegmentIndex=1;
     _endtimeBtn.hidden=YES;
     _endDateTxtField.hidden=YES;
@@ -67,7 +68,13 @@
     _reasonTopValue.constant=12;
     _halfdaySegment.hidden=YES;
     _startDateTop.constant=12;
-
+    _leavesCollectionView.showsHorizontalScrollIndicator=NO;
+    
+    
+//    _leaveTypeSegment.layer.cornerRadius=10;
+//    _halfdaySegment.layer.cornerRadius=5;
+//    _leaveTypeSegment.clipsToBounds=YES;
+//    _halfdaySegment.clipsToBounds=YES;
 }
 
 /*
@@ -83,14 +90,29 @@
 - (IBAction)submitBtnAction:(id)sender {
     if(_startDateTxtField.text.length == 0){
         [self showErrorAlertWithMessage:Localized(@"Please Select StartDate")];
-    }else if(_endDateTxtField.text.length == 0){
+    }
+    else if(_leaveTypeSegment.selectedSegmentIndex==2&&_endDateTxtField.text.length == 0){
+     
         [self showErrorAlertWithMessage:Localized(@"Please Select EndDate")];
-    }else if(!selectedleaveType){
-        [self showErrorAlertWithMessage:Localized(@"Please Select LeaveType")];
-    }else if(_CommentTxtView.text.length == 0){
-        [self showErrorAlertWithMessage:Localized(@"Please Enter Comment")];
+    
+    }
+//    else if(!selectedleaveType){
+//        [self showErrorAlertWithMessage:Localized(@"Please Select LeaveType")];
+//    }
+    
+    else if(_CommentTxtView.text.length == 0){
+        [self showErrorAlertWithMessage:Localized(@"Please Enter Reason")];
     }else{
-    [self makePostCallForPage:APPLYLEAVE withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_type":[selectedleaveType valueForKey:@"id"],@"start_date":_startDateTxtField.text,@"end_date":_endDateTxtField.text,@"no_days":[NSString stringWithFormat:@"%d",numberOfDays],@"description":_CommentTxtView.text} withRequestCode:13];
+        
+        NSString *halfDayOrNOt=_leaveTypeSegment.selectedSegmentIndex==0?@"HALF":@"FULL";
+        NSString *MorningOrNOt=@"";
+        if(_leaveTypeSegment.selectedSegmentIndex==0)
+            {
+                MorningOrNOt=_halfdaySegment.selectedSegmentIndex==0?@"MORNING":@"EVENING";
+            }
+        [self makePostCallForPage:APPLYLEAVE withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"start_date":_startDateTxtField.text,@"end_date":_endDateTxtField.text.length>0?_endDateTxtField.text:_startDateTxtField.text,@"no_days":[NSString stringWithFormat:@"%d",numberOfDays],@"description":_CommentTxtView.text
+                                                          ,@"duration":halfDayOrNOt,@"duration_shift":MorningOrNOt,@"leave_type":@"1"
+                                                      } withRequestCode:13];
 }
     
 }
@@ -99,9 +121,7 @@
     
    
 }
-- (void)cancelButtonClicked:(UIViewController *)secondDetailViewController {
-    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideTopBottom];
-}
+
 - (IBAction)startTimeBtnAction:(id)sender {
     StoryboardExampleViewController *vc = [[StoryboardExampleViewController alloc] initWithNibName:@"StoryboardExampleViewController" bundle:nil];
     vc.delegate=self;
@@ -119,6 +139,9 @@
     
     [self presentPopupViewController:vc animationType:MJPopupViewAnimationSlideBottomTop dismissed:nil];
     
+}
+- (void)cancelButtonClicked:(UIViewController *)secondDetailViewController {
+    [self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationSlideTopBottom];
 }
 - (IBAction)endTimeBtnAction:(id)sender {
     if(_startDateTxtField.text.length>0){
@@ -145,6 +168,7 @@
         
         NSLog(@"There are %d days in between the two dates.", numberOfDays);
         self->_numberOfLeavesLbl.text =[NSString stringWithFormat:@"Your Applying  %d Days",numberOfDays+1];
+        numberOfDays=+1;
     };
     
     [self presentPopupViewController:vc animationType:MJPopupViewAnimationSlideBottomTop dismissed:nil];
@@ -197,7 +221,8 @@
             NSString *str=[result valueForKey:@"message"];
             [self showErrorAlertWithMessage:Localized(str)];
         } else {
-            [self.tabBarController setSelectedIndex:0];
+//            [self.tabBarController setSelectedIndex:0];
+            [self.navigationController popViewControllerAnimated:YES];
             [self showSuccessMessage:[result valueForKey:@"message"]];
             
         }
@@ -245,6 +270,15 @@
     LeaveTypeCollectionViewCell *ccell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LeaveTypeCollectionViewCell" forIndexPath:indexPath];
     NSDictionary *dic=[leaveTypes objectAtIndex:indexPath.row];
     ccell.leaveTitleLbl.text=[NSString stringWithFormat:@"%@",[dic valueForKey:@"title"]];
+    [ccell.leaveImage setImageWithURL:[dic valueForKey:@"image"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    ccell.remaingLeaveLbl.text=[NSString stringWithFormat:@"%@",[dic valueForKey:@"message"]];
+    
+    ccell.remaingLeaveLbl.textAlignment=NSTextAlignmentCenter;
+    ccell.leaveTitleLbl.textAlignment=NSTextAlignmentCenter;
+    ccell.leaveView.layer.borderColor=[UIColor whiteColor].CGColor;
+    ccell.leaveView.layer.borderWidth=1;
+    ccell.leaveView.layer.cornerRadius=10;
+    ccell.leaveView.clipsToBounds=YES;
     return ccell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView

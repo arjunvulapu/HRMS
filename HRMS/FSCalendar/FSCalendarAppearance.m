@@ -42,7 +42,7 @@
         _caseOptions = FSCalendarCaseOptionsHeaderUsesDefaultCase|FSCalendarCaseOptionsWeekdayUsesDefaultCase;
         
         _backgroundColors = [NSMutableDictionary dictionaryWithCapacity:5];
-        _backgroundColors[@(FSCalendarCellStateNormal)]      = [UIColor clearColor];
+     //   _backgroundColors[@(FSCalendarCellStateNormal)]      = [UIColor clearColor];
         _backgroundColors[@(FSCalendarCellStateSelected)]    = FSCalendarStandardSelectionColor;
         _backgroundColors[@(FSCalendarCellStateDisabled)]    = [UIColor clearColor];
         _backgroundColors[@(FSCalendarCellStatePlaceholder)] = [UIColor clearColor];

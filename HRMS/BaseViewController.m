@@ -11,7 +11,7 @@
 #import "SVProgressHUD.h"
 #import "Utils.h"
 #import "Common.h"
-
+//#import <AMShimmer/AMShimmer-Swift.h>
 @interface BaseViewController () <UIGestureRecognizerDelegate>
 
 @end
@@ -408,8 +408,8 @@ textField.layer.masksToBounds = YES;
 //    });
 //}
 -(void)viewWillDisappear:(BOOL)animated{
-    //[GiFHUD dismiss];
-    [self hideHUD];
+//    [GiFHUD dismiss];
+//    [self hideHUD];
 }
 
 - (void) showSuccessMessage:(NSString *)message {
@@ -428,14 +428,17 @@ textField.layer.masksToBounds = YES;
 
 - (void) showHUD:(NSString *)labelText {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    //[GiFHUD show];
+   // [GiFHUD show];
+    //[AMShimmer startFor:self.view except:@[] isToLastView:YES];
+   // AMShimmer.start(for: tableView)
     self.view.userInteractionEnabled=NO;
 }
 
 - (void) hideHUD {
     self.view.userInteractionEnabled=YES;
-   // [GiFHUD dismiss];
+    //[GiFHUD dismiss];
     [SVProgressHUD dismissWithDelay:(NSTimeInterval) 0.2f];
+    //[AMShimmer stopFor:self.view];
 }
 
 - (void) makePostCallForPage:(NSString *)page

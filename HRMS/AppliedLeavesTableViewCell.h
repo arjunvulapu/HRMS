@@ -17,6 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *leaveTypeRLbl;
 @property (weak, nonatomic) IBOutlet UITextView *descrptiontxView;
 @property (weak, nonatomic) IBOutlet UIView *backGroundView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+- (IBAction)cancelBtnAction:(id)sender;
+@property (nonatomic) void (^Cancel)();
+@property (weak, nonatomic) IBOutlet UIStackView *hrView;
+@property (weak, nonatomic) IBOutlet UIButton *acceptBtn;
+@property (weak, nonatomic) IBOutlet UIButton *hrcancelBtn;
+- (IBAction)acceptBtnAction:(id)sender;
+- (IBAction)hrCancelledBtnAction:(id)sender;
+@property(nonatomic) void (^acceptBtnAction)();
+@property(nonatomic) void (^hrCancelBtnAction)();
+@property (weak, nonatomic) IBOutlet UILabel *employeecodeLbl;
+@property (weak, nonatomic) IBOutlet UILabel *employeeNameLbl;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottom;
+@property (weak, nonatomic) IBOutlet UILabel *appliedOnLbl;
 
 @end
 

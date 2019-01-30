@@ -8,7 +8,8 @@ use_frameworks!
   # Pods for HRMSystem
 pod 'IQKeyboardManager'
 pod 'JVFloatLabeledTextField'
-
+#pod 'AMShimmer'
+pod 'OneSignal', '>= 2.6.2', '< 3.0'
   target 'HRMSystemTests' do
     inherit! :search_paths
     # Pods for testing

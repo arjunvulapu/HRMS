@@ -10,6 +10,9 @@
 #import "Common.h"
 #import "Utils.h"
 //#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+#import "GiFHUD.h"
+
+//#import "HRMSystem/HRMSystem-Swift.h"
 
 @interface BaseViewController : UIViewController<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate> {
     int requestCode;

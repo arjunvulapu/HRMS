@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *leaveImage;
 @property (weak, nonatomic) IBOutlet UILabel *leaveTitleLbl;
 @property (weak, nonatomic) IBOutlet UILabel *remaingLeaveLbl;
+@property (weak, nonatomic) IBOutlet UIView *leaveView;
 
 @end
 

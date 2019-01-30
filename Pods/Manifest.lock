@@ -1,20 +1,24 @@
 PODS:
   - IQKeyboardManager (6.2.0)
   - JVFloatLabeledTextField (1.2.1)
+  - OneSignal (2.9.5)
 
 DEPENDENCIES:
   - IQKeyboardManager
   - JVFloatLabeledTextField
+  - OneSignal (< 3.0, >= 2.6.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - IQKeyboardManager
     - JVFloatLabeledTextField
+    - OneSignal
 
 SPEC CHECKSUMS:
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
+  OneSignal: ccdeb961882f8668305e5b694e2cb7cb325fc907
 
-PODFILE CHECKSUM: 33328ccb320b878d919b472c805dbfe2caf8b69d
+PODFILE CHECKSUM: f983a053efb2a1d3f77b156e1b5102ea3d297cec
 
 COCOAPODS: 1.5.3

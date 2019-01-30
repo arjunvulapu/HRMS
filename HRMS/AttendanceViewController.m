@@ -9,6 +9,7 @@
 #import "AttendanceViewController.h"
 #import "FSCalendarExtensions.h"
 #import "AttendanceCollectionViewCell.h"
+#import "FTPopOverMenu/FTPopOverMenu.h"
 @interface AttendanceViewController ()<FSCalendarDelegate,FSCalendarDataSource,FSCalendarDelegateAppearance>
 {
     NSMutableArray *attendanceList;
@@ -17,8 +18,15 @@
     NSString *selectedDatestr;
     
     NSDictionary *selectedDateInfo;
+    
+    
+    NSMutableArray *AvailableList;
+    NSMutableArray *SelectedMonthDict;
+
 }
 @property (strong, nonatomic) NSDateFormatter *dateFormatter1;
+@property (strong, nonatomic) NSDateFormatter *dateFormatterForBtn;
+
 @property (strong, nonatomic) NSCalendar *gregorianCalendar;
 @property (strong, nonatomic) NSArray<NSString *> *datesShouldNotBeSelected;
 @property (strong, nonatomic) NSArray<NSString *> *datesShouldBeSelected;
@@ -85,9 +93,11 @@
     self.dateFormatter3.dateFormat = @"dd-MM-yyyy";
     [self addbackground:_backgroundView];
     _calanderView.backgroundColor=[UIColor clearColor];
-    
-    
-    
+    AvailableList=[[NSMutableArray  alloc] init];
+    _showingDateBtn.layer.borderWidth=1;
+    _showingDateBtn.layer.borderColor=[UIColor whiteColor].CGColor;
+    _showingDateBtn.layer.cornerRadius=10;
+    _showingDateBtn.clipsToBounds=YES;
      [self setTheme:1];
     // Do any additional setup after loading the view.
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
@@ -104,6 +114,14 @@
 //                                      @"22-01-2019",
 //                                      @"04-01-2019"];
  userdic=[[NSUserDefaults standardUserDefaults ]valueForKey:@"USER"];
+    NSDate *date = [NSDate date]; //I'm using this just to show the this is how you convert a date
+    
+    _dateFormatterForBtn = [[NSDateFormatter alloc] init];
+//    [df setDateStyle:NSDateFormatterLongStyle]; // day, Full month and year
+//    [df setTimeStyle:NSDateFormatterNoStyle];  // nothing
+    [_dateFormatterForBtn setDateFormat:@"MMMM yyyy"];
+    NSString *dateString = [_dateFormatterForBtn stringFromDate:date];
+    [_showingDateBtn setTitle:dateString forState:UIControlStateNormal];
     NSInteger years = [_calanderView yearOfDate:_calanderView.currentPage];
     NSInteger month = [_calanderView monthOfDate:_calanderView.currentPage];
     [self makePostCallForPage:ATTENDANCE withParams:@{@"employee_code":[userdic valueForKey:@"employee_code"],@"month":[NSString stringWithFormat:@"%02ld",(long)month],@"year":[NSString stringWithFormat:@"%ld",(long)years]} withRequestCode:14];
@@ -136,7 +154,7 @@
                 _calanderView.appearance.borderRadius = 0.0;
                 _calanderView.appearance.headerMinimumDissolvedAlpha = 0.0;
                 _calanderView.placeholderType = FSCalendarPlaceholderTypeNone;
-
+                _calanderView.calendarHeaderView.hidden=YES;
                 break;
             }
             case 2: {
@@ -158,20 +176,30 @@
 }
 -(void)parseResult:(id)result withCode:(int)reqeustCode{
     if(reqeustCode==14){
-    
+        if(AvailableList.count==0){
+        [self makePostCallForPage:ATTENDANCEMONTHSLUST withParams:@{@"employee_code":[userdic valueForKey:@"employee_code"]} withRequestCode:15];
+        }
+
         if ([[result valueForKey:@"status"] isEqualToString:@"Failure"]) {
             NSString *str=[result valueForKey:@"message"];
             [self showErrorAlertWithMessage:Localized(str)];
         } else {
             attendanceResult=result;
+//            _calanderView.minimumDate = [self.dateFormatter1 dateFromString:[attendanceResult valueForKey:@"start_date"]];
+           // [self minimumDateForCalendar:_calanderView];
             if([result  valueForKey:@"attendance"]){
             attendanceList=[result  valueForKey:@"attendance"];
             }else{
                 attendanceList=[[NSMutableArray alloc] init];
             }
             [_calanderView reloadData];
+            [_attendanceCollectionView reloadData];
         }
+    }else if(reqeustCode==15){
+        AvailableList=result;
+        
     }
+    
 }
 /*
 #pragma mark - Navigation
@@ -209,7 +237,11 @@
 - (NSDate *)minimumDateForCalendar:(FSCalendar *)calendar
 {
     //return [self.dateFormatter1 dateFromString:@"2016/10/01"];
-    return [self.dateFormatter1 dateFromString:@"01-03-2016"];
+    if([attendanceResult valueForKey:@"start_date"]){
+        return [self.dateFormatter1 dateFromString:[attendanceResult valueForKey:@"start_date"]];
+        }
+    return nil;
+    //return [self.dateFormatter1 dateFromString:@"01-03-2016"];
 }
 
 - (NSDate *)maximumDateForCalendar:(FSCalendar *)calendar
@@ -243,6 +275,7 @@
         if(attendanceList.count>0){
             for(NSDictionary *dayRec in attendanceList){
                 if([[dayRec valueForKey:@"date"] isEqualToString:selectedDatestr]){
+                   
                             selectedDateInfo = dayRec;
                 }
             }
@@ -264,6 +297,8 @@
     NSInteger month = [_calanderView monthOfDate:_calanderView.currentPage];
     [self makePostCallForPage:ATTENDANCE withParams:@{@"employee_code":[userdic valueForKey:@"employee_code"],@"month":[NSString stringWithFormat:@"%02ld",(long)month],@"year":[NSString stringWithFormat:@"%ld",(long)years]} withRequestCode:14];
     NSLog(@"did change to page %@",[self.dateFormatter1 stringFromDate:calendar.currentPage]);
+    NSString *dateString = [_dateFormatterForBtn stringFromDate:calendar.currentPage];
+    [_showingDateBtn setTitle:dateString forState:UIControlStateNormal];
 }
 
 - (void)calendar:(FSCalendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated
@@ -326,17 +361,21 @@
         for(NSDictionary *dayRec in attendanceList){
             
             if([[dayRec valueForKey:@"date"] isEqualToString:[self.dateFormatter1 stringFromDate:date]]){
-                if([[dayRec valueForKey:@"status"] isEqual:@"Holiday"]||[[dayRec valueForKey:@"status"] isEqual:@"WeeklyOff"]){
-                   return [UIColor colorWithRed:22/255.0f green:113/255.0f  blue:28/255.0f  alpha:1.0];
+                if([[dayRec valueForKey:@"status"] isEqual:@"Holiday"]){
+                    return [UIColor blackColor];
+//                   return [UIColor colorWithRed:22/255.0f green:113/255.0f  blue:28/255.0f  alpha:1.0];
+                }else  if([[dayRec valueForKey:@"status"] isEqual:@"WeeklyOff"]){
+                    return [UIColor orangeColor];
                 }
-//                else if([[dayRec valueForKey:@"status"] isEqual:@"Present"]||[[dayRec valueForKey:@"status"] isEqual:@"WeeklyOff Present"]){
-//                    return [UIColor greenColor];
-//                }
+                else if([[dayRec valueForKey:@"status"] isEqual:@"Present"]||[[dayRec valueForKey:@"status"] isEqual:@"WeeklyOff Present"]){
+                    return [UIColor colorWithRed:22/255.0f green:113/255.0f  blue:28/255.0f  alpha:1.0];
+                }
 //                else if([[dayRec valueForKey:@"status"] isEqual:@"WeeklyOff"]){
 //                    return [UIColor yellowColor];
 //                }
                 else if([[dayRec valueForKey:@"status"] isEqual:@"Absent (No OutPunch)"]||[[dayRec valueForKey:@"status"] isEqual:@"Absent"]){
-                    return [UIColor colorWithRed:204/255.0f  green:16/255.0f  blue:16/255.0f  alpha:1.0];
+//                    return [UIColor colorWithRed:204/255.0f  green:16/255.0f  blue:16/255.0f  alpha:1.0];
+                    return [UIColor redColor];
                 }
             }else if([NSDate date] == date){
                 return [UIColor clearColor];
@@ -369,10 +408,25 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    
-    if([selectedDateInfo valueForKey:@"punch_records"]){
+    if(selectedDatestr.length==0&&attendanceResult.count!=0){
+        return 7;
+    }
+    else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"Absent"])
+    {
+    // [self showErrorAlertWithMessage:[NSString stringWithFormat:@"On %@ Your Absent",[selectedDateInfo valueForKey:@"date"]]];
+     return 1+1+7;
+    }else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"Holiday"])
+    {
+     //[self showErrorAlertWithMessage:[NSString stringWithFormat:@"On %@ Company Have Holiday",[selectedDateInfo valueForKey:@"date"]]];
+     return 1+1+7;
+    }else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"WeeklyOff"])
+    {
+    // [self showErrorAlertWithMessage:[NSString stringWithFormat:@"On %@ Company Have WeeklyOff",[selectedDateInfo valueForKey:@"date"]]];
+     return 1+1+7;
+    }
+   else  if([selectedDateInfo valueForKey:@"punch_records"]){
         NSMutableArray *puncRecords=[selectedDateInfo valueForKey:@"punch_records"];
-        return puncRecords.count+3;
+        return puncRecords.count+3+7+1;
     }else{
         
     return 0;
@@ -385,27 +439,142 @@
     ccell.infoLbl.text=[NSString stringWithFormat:@"Arjun %ld",(long)indexPath.row];
     ccell.infoLbl.textAlignment=NSTextAlignmentCenter;
     ccell.infoLbl.textColor=[UIColor whiteColor];
-    
-    if(indexPath.row==0){
+   // if(selectedDatestr.length==0){
+        NSDictionary *hist=[attendanceResult valueForKey:@"total"];
+        NSString *rupee=@"\u20B9";
+        if(indexPath.row==0){
+            ccell.infoLbl.text=[NSString stringWithFormat:@"For %@",_showingDateBtn.titleLabel.text];
+            ccell.contentView.backgroundColor=[UIColor lightTextColor];
+        }
+        else if(indexPath.row==1){
+            ccell.infoLbl.text=[NSString stringWithFormat:@"Present : %@ Days",[hist valueForKey:@"present"]];
+        }else  if(indexPath.row==2){
+            ccell.infoLbl.text=[NSString stringWithFormat:@"Absent : %@ Days",[hist valueForKey:@"absent"]];
+        }else  if(indexPath.row==3){
+            ccell.infoLbl.text=[NSString stringWithFormat:@"Late Days : %@ Days",[hist valueForKey:@"late_days"]];
+        }else  if(indexPath.row==4){
+            ccell.infoLbl.text=[NSString stringWithFormat:@"Late Time : %@ ",[hist valueForKey:@"late_time"]];
+        }else  if(indexPath.row==5){
+            ccell.infoLbl.text=[NSString stringWithFormat:@"LOP/Day : %@%@",rupee,[hist valueForKey:@"approx_lop"]];
+        }else if(indexPath.row==6){
+            ccell.infoLbl.text=[NSString stringWithFormat:@"LOP : %@%@",rupee,[NSString stringWithFormat:@"%d",[[hist valueForKey:@"approx_lop"] intValue]*[[hist valueForKey:@"absent"] intValue]]];
+
+        }else if(indexPath.row==7){
+            ccell.infoLbl.text=[NSString stringWithFormat:@"ON %@",selectedDatestr];
+            ccell.contentView.backgroundColor=[UIColor lightTextColor];
+
+        }
+//    }
+//     else
+else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"Absent"])
+    {
+        ccell.infoLbl.text=[NSString stringWithFormat:@"On %@ Your Absent",[selectedDateInfo valueForKey:@"date"]];
+       // return 0;
+    }else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"Holiday"])
+    {
+         ccell.infoLbl.text=[NSString stringWithFormat:@"On %@ Company Have Holiday",[selectedDateInfo valueForKey:@"date"]];
+        //return 0;
+    }else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"WeeklyOff"])
+    {
+         ccell.infoLbl.text=[NSString stringWithFormat:@"On %@ Company Have WeeklyOff",[selectedDateInfo valueForKey:@"date"]];
+        //return 0;
+    }
+       
+       
+       
+       
+     else  if(indexPath.row==1+7){
         ccell.infoLbl.text=[NSString stringWithFormat:@"IN TIME :%@",[selectedDateInfo valueForKey:@"in_time"]];
-    }else  if(indexPath.row==1){
+    }else  if(indexPath.row==2+7){
         ccell.infoLbl.text=[NSString stringWithFormat:@"OUT TIME :%@",[selectedDateInfo valueForKey:@"out_time"]];
-    }else  if(indexPath.row==2){
+    }else  if(indexPath.row==3+7){
         ccell.infoLbl.text=[NSString stringWithFormat:@"DURATION :%@",[selectedDateInfo valueForKey:@"duration"]];
     }else{
         NSMutableArray *puncRecords=[selectedDateInfo valueForKey:@"punch_records"];
-        ccell.infoLbl.text=[NSString stringWithFormat:@"%@",[puncRecords objectAtIndex:indexPath.row-3]];
+        ccell.infoLbl.text=[NSString stringWithFormat:@"%@",[puncRecords objectAtIndex:indexPath.row-3-7-1]];
+    }
+    
+    if(indexPath.row==0||indexPath.row==7){
+        ccell.contentView.backgroundColor=[UIColor lightTextColor];
+        ccell.infoLbl.textColor=[UIColor blackColor];
+    }else{
+        ccell.contentView.backgroundColor=[UIColor clearColor];
+        ccell.infoLbl.textColor=[UIColor whiteColor];
+
     }
     return ccell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row<3){
-        return CGSizeMake(collectionView.frame.size.width, 30);
+    if(indexPath.row==0||indexPath.row==7){
+        return CGSizeMake((collectionView.frame.size.width-2), 30);
+
+    }else
+     if(indexPath.row<7){
+         return CGSizeMake((collectionView.frame.size.width-12)/2, 30);
+     }
+     else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"Absent"])
+     {
+        return CGSizeMake((collectionView.frame.size.width-2), 30);
+     }else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"Holiday"])
+     {
+        return CGSizeMake((collectionView.frame.size.width-2), 30);
+     }else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"WeeklyOff"])
+     {
+          return CGSizeMake((collectionView.frame.size.width-2), 30);
+         
+     }
+    
+    
+     else
+    if(indexPath.row<11){
+        return CGSizeMake(collectionView.frame.size.width/3.2, 30);
     }else{
          return CGSizeMake((collectionView.frame.size.width-12)/2, 30);
     }
   
 }
+
+
+- (IBAction)showingDAteBtnAction:(id)sender {
+   // [self makePostCallForPage:ATTENDANCEMONTHSLUST withParams:@{@"employee_code":[userdic valueForKey:@"employee_code"]} withRequestCode:15];
+    
+        FTPopOverMenuConfiguration *configuration = [FTPopOverMenuConfiguration defaultConfiguration];
+        configuration.menuRowHeight = 40;
+        configuration.menuWidth = 120;
+        configuration.textColor = [UIColor blackColor];
+        configuration.textFont = [UIFont boldSystemFontOfSize:14];
+        configuration.tintColor = [UIColor whiteColor];
+        configuration.borderColor = [UIColor lightGrayColor];
+        configuration.borderWidth = 0.5;
+        configuration.textAlignment = UITextAlignmentCenter;
+        NSMutableArray *Item=[[NSMutableArray alloc] init];
+        
+        for(NSDictionary *dict in AvailableList){
+            [Item addObject:[dict valueForKey:@"title"]];
+        }
+        
+        [FTPopOverMenu showForSender:_showingDateBtn
+                       withMenuArray:Item
+                           doneBlock:^(NSInteger selectedIndex) {
+                               
+                               NSLog(@"done block. do something. selectedIndex : %ld", (long)selectedIndex);
+                               self->SelectedMonthDict = [AvailableList objectAtIndex:selectedIndex];
+                               [self->_showingDateBtn setTitle:[SelectedMonthDict valueForKey:@"title"] forState:UIControlStateNormal];
+                               //                               [_calanderView scrollToDate:[self.dateFormatterForBtn dateFromString:[SelectedMonthDict valueForKey:@"title"]]];
+                               [self->_calanderView selectDate:[self.dateFormatterForBtn dateFromString:[SelectedMonthDict valueForKey:@"title"]] scrollToDate:YES];
+                               [self.calanderView deselectDate:[self.dateFormatterForBtn dateFromString:[SelectedMonthDict valueForKey:@"title"]]];
+                           } dismissBlock:^{
+                               
+                               NSLog(@"user canceled. do nothing.");
+                               
+                               //                           FTPopOverMenuConfiguration *configuration = [FTPopOverMenuConfiguration defaultConfiguration];
+                               //                           configuration.allowRoundedArrow = !configuration.allowRoundedArrow;
+                               
+                           }];
+    
+}
+
+
 @end
