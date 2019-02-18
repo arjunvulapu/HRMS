@@ -16,7 +16,25 @@
 		18089A5621FEDF4B00AE792D /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18089A5321FEDF4A00AE792D /* SZTextView.m */; };
 		18089A5A21FEFC8F00AE792D /* EmployeesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18089A5921FEFC8F00AE792D /* EmployeesTableViewCell.m */; };
 		18089A5D21FEFCC800AE792D /* EmployeesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18089A5C21FEFCC800AE792D /* EmployeesViewController.m */; };
+		180E83E42208354D0030F538 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180E83E32208354C0030F538 /* GoogleService-Info.plist */; };
+		180E83E72208673E0030F538 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E83E62208673E0030F538 /* NotificationsViewController.m */; };
+		180E83EA220867630030F538 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E83E9220867630030F538 /* NotificationTableViewCell.m */; };
+		180E83ED2208764C0030F538 /* NotificationDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E83EC2208764C0030F538 /* NotificationDetailVC.m */; };
+		180E83F822095BD00030F538 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83EE22095BCD0030F538 /* OpenSans-Regular.ttf */; };
+		180E83F922095BD00030F538 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83EF22095BCD0030F538 /* OpenSans-SemiboldItalic.ttf */; };
+		180E83FA22095BD00030F538 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83F022095BCD0030F538 /* OpenSans-Italic.ttf */; };
+		180E83FB22095BD00030F538 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83F122095BCE0030F538 /* OpenSans-Light.ttf */; };
+		180E83FC22095BD00030F538 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83F222095BCE0030F538 /* OpenSans-BoldItalic.ttf */; };
+		180E83FD22095BD00030F538 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83F322095BCE0030F538 /* OpenSans-ExtraBold.ttf */; };
+		180E83FE22095BD00030F538 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83F422095BCF0030F538 /* OpenSans-LightItalic.ttf */; };
+		180E83FF22095BD00030F538 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83F522095BCF0030F538 /* OpenSans-Semibold.ttf */; };
+		180E840022095BD00030F538 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83F622095BCF0030F538 /* OpenSans-Bold.ttf */; };
+		180E840122095BD00030F538 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 180E83F722095BD00030F538 /* OpenSans-ExtraBoldItalic.ttf */; };
+		180E840422097A5F0030F538 /* ProjectsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E840322097A5F0030F538 /* ProjectsVC.m */; };
+		180E840722097EF50030F538 /* ProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E840622097EF50030F538 /* ProjectCell.m */; };
+		180E840D2209B9240030F538 /* UIView+RoundedCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E840C2209B9240030F538 /* UIView+RoundedCorners.m */; };
 		1815ED1421F59BA9006D63A0 /* close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1815ED1321F59BA9006D63A0 /* close@3x.png */; };
+		1817939E221134A0009E006D /* TaskDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1817939D221134A0009E006D /* TaskDetailVC.m */; };
 		1818790721F0B210007B1F09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818790621F0B210007B1F09 /* AppDelegate.m */; };
 		1818790A21F0B210007B1F09 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818790921F0B210007B1F09 /* ViewController.m */; };
 		1818790D21F0B210007B1F09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1818790B21F0B210007B1F09 /* Main.storyboard */; };
@@ -93,6 +111,10 @@
 		18272EF521F58D0F00E573D7 /* FSCalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 18272EE521F58D0E00E573D7 /* FSCalendarAppearance.m */; };
 		18272EFC21F58D3800E573D7 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18272EF921F58D3800E573D7 /* UIViewController+MJPopupViewController.m */; };
 		18272EFD21F58D3800E573D7 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18272EFA21F58D3800E573D7 /* MJPopupBackgroundView.m */; };
+		182AF186220EACA4002A1539 /* ProjectDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182AF185220EACA4002A1539 /* ProjectDetailVC.m */; };
+		182AF189220EB29E002A1539 /* LeadCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182AF188220EB29E002A1539 /* LeadCollectionViewCell.m */; };
+		182AF18C220EB2AD002A1539 /* TeamCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182AF18B220EB2AD002A1539 /* TeamCollectionViewCell.m */; };
+		182AF18F220EE93E002A1539 /* MemberInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182AF18D220EE93D002A1539 /* MemberInfoViewController.m */; };
 		182B816421FC615E00302C87 /* WorkSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182B816321FC615E00302C87 /* WorkSheetViewController.m */; };
 		182B816621FC66AB00302C87 /* send.png in Resources */ = {isa = PBXBuildFile; fileRef = 182B816521FC66A600302C87 /* send.png */; };
 		182B816921FC673700302C87 /* WorkSheetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182B816821FC673700302C87 /* WorkSheetTableViewCell.m */; };
@@ -238,7 +260,32 @@
 		18089A5921FEFC8F00AE792D /* EmployeesTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmployeesTableViewCell.m; sourceTree = "<group>"; };
 		18089A5B21FEFCC800AE792D /* EmployeesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmployeesViewController.h; sourceTree = "<group>"; };
 		18089A5C21FEFCC800AE792D /* EmployeesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmployeesViewController.m; sourceTree = "<group>"; };
+		180E83E32208354C0030F538 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		180E83E52208673E0030F538 /* NotificationsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
+		180E83E62208673E0030F538 /* NotificationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
+		180E83E8220867630030F538 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
+		180E83E9220867630030F538 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
+		180E83EB2208764C0030F538 /* NotificationDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationDetailVC.h; sourceTree = "<group>"; };
+		180E83EC2208764C0030F538 /* NotificationDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationDetailVC.m; sourceTree = "<group>"; };
+		180E83EE22095BCD0030F538 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		180E83EF22095BCD0030F538 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		180E83F022095BCD0030F538 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		180E83F122095BCE0030F538 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		180E83F222095BCE0030F538 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		180E83F322095BCE0030F538 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		180E83F422095BCF0030F538 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		180E83F522095BCF0030F538 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		180E83F622095BCF0030F538 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		180E83F722095BD00030F538 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		180E840222097A5F0030F538 /* ProjectsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectsVC.h; sourceTree = "<group>"; };
+		180E840322097A5F0030F538 /* ProjectsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectsVC.m; sourceTree = "<group>"; };
+		180E840522097EF50030F538 /* ProjectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectCell.h; sourceTree = "<group>"; };
+		180E840622097EF50030F538 /* ProjectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectCell.m; sourceTree = "<group>"; };
+		180E840B2209B9240030F538 /* UIView+RoundedCorners.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedCorners.h"; sourceTree = "<group>"; };
+		180E840C2209B9240030F538 /* UIView+RoundedCorners.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedCorners.m"; sourceTree = "<group>"; };
 		1815ED1321F59BA9006D63A0 /* close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@3x.png"; sourceTree = "<group>"; };
+		1817939C221134A0009E006D /* TaskDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskDetailVC.h; sourceTree = "<group>"; };
+		1817939D221134A0009E006D /* TaskDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskDetailVC.m; sourceTree = "<group>"; };
 		1818790521F0B210007B1F09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1818790621F0B210007B1F09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1818790821F0B210007B1F09 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -398,6 +445,14 @@
 		18272EF921F58D3800E573D7 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
 		18272EFA21F58D3800E573D7 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
 		18272EFB21F58D3800E573D7 /* PopViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewControllerDelegate.h; sourceTree = "<group>"; };
+		182AF184220EACA4002A1539 /* ProjectDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectDetailVC.h; sourceTree = "<group>"; };
+		182AF185220EACA4002A1539 /* ProjectDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectDetailVC.m; sourceTree = "<group>"; wrapsLines = 0; };
+		182AF187220EB29E002A1539 /* LeadCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeadCollectionViewCell.h; sourceTree = "<group>"; };
+		182AF188220EB29E002A1539 /* LeadCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeadCollectionViewCell.m; sourceTree = "<group>"; };
+		182AF18A220EB2AD002A1539 /* TeamCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamCollectionViewCell.h; sourceTree = "<group>"; };
+		182AF18B220EB2AD002A1539 /* TeamCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamCollectionViewCell.m; sourceTree = "<group>"; };
+		182AF18D220EE93D002A1539 /* MemberInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberInfoViewController.m; sourceTree = "<group>"; };
+		182AF18E220EE93E002A1539 /* MemberInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberInfoViewController.h; sourceTree = "<group>"; };
 		182B816221FC615E00302C87 /* WorkSheetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkSheetViewController.h; sourceTree = "<group>"; };
 		182B816321FC615E00302C87 /* WorkSheetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkSheetViewController.m; sourceTree = "<group>"; };
 		182B816521FC66A600302C87 /* send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send.png; sourceTree = "<group>"; };
@@ -633,14 +688,19 @@
 			children = (
 				1818790521F0B210007B1F09 /* AppDelegate.h */,
 				1818790621F0B210007B1F09 /* AppDelegate.m */,
+				180E840B2209B9240030F538 /* UIView+RoundedCorners.h */,
+				180E840C2209B9240030F538 /* UIView+RoundedCorners.m */,
 				1818790821F0B210007B1F09 /* ViewController.h */,
 				1818790921F0B210007B1F09 /* ViewController.m */,
 				1818793721F195B0007B1F09 /* LoginViewController.h */,
+				180E83E32208354C0030F538 /* GoogleService-Info.plist */,
 				1818793821F195B0007B1F09 /* LoginViewController.m */,
 				181879BF21F19F9A007B1F09 /* BaseViewController.h */,
 				181879C021F19F9B007B1F09 /* BaseViewController.m */,
 				18187A2221F1ADBA007B1F09 /* UserInfoViewController.h */,
 				18187A2321F1ADBA007B1F09 /* UserInfoViewController.m */,
+				182AF18E220EE93E002A1539 /* MemberInfoViewController.h */,
+				182AF18D220EE93D002A1539 /* MemberInfoViewController.m */,
 				1840C41921F5F6DF00383CB4 /* ContactUsViewController.h */,
 				1840C41821F5F6DF00383CB4 /* ContactUsViewController.m */,
 				1807202D21FC482B0012FC21 /* HRListViewController.h */,
@@ -658,6 +718,16 @@
 				18F2C9D1220010CA0045484A /* oswald.bold.ttf */,
 				18F2C9D2220010CB0045484A /* oswald.light.ttf */,
 				18F2C9D3220010CB0045484A /* oswald.regular.ttf */,
+				180E83F622095BCF0030F538 /* OpenSans-Bold.ttf */,
+				180E83F222095BCE0030F538 /* OpenSans-BoldItalic.ttf */,
+				180E83F322095BCE0030F538 /* OpenSans-ExtraBold.ttf */,
+				180E83F722095BD00030F538 /* OpenSans-ExtraBoldItalic.ttf */,
+				180E83F022095BCD0030F538 /* OpenSans-Italic.ttf */,
+				180E83F122095BCE0030F538 /* OpenSans-Light.ttf */,
+				180E83F422095BCF0030F538 /* OpenSans-LightItalic.ttf */,
+				180E83EE22095BCD0030F538 /* OpenSans-Regular.ttf */,
+				180E83F522095BCF0030F538 /* OpenSans-Semibold.ttf */,
+				180E83EF22095BCD0030F538 /* OpenSans-SemiboldItalic.ttf */,
 				18BE29C021F8394B00F5D55F /* splash.png */,
 				1840C41121F5DF4600383CB4 /* menu@3x.png */,
 				18BE2A3821F979C600F5D55F /* loader.gif */,
@@ -669,6 +739,10 @@
 				18089A5921FEFC8F00AE792D /* EmployeesTableViewCell.m */,
 				18089A5B21FEFCC800AE792D /* EmployeesViewController.h */,
 				18089A5C21FEFCC800AE792D /* EmployeesViewController.m */,
+				180E840222097A5F0030F538 /* ProjectsVC.h */,
+				180E840322097A5F0030F538 /* ProjectsVC.m */,
+				180E840522097EF50030F538 /* ProjectCell.h */,
+				180E840622097EF50030F538 /* ProjectCell.m */,
 				18089A4F21FEDF4A00AE792D /* SZTextView */,
 				1807202421FC37B40012FC21 /* SRAlertView */,
 				18BE2A3A21F97D8600F5D55F /* FBShimmering */,
@@ -714,6 +788,20 @@
 				1881F53221F1F92B0001C793 /* account.png */,
 				1881F53021F1F9270001C793 /* home@3x.png */,
 				1881F53121F1F92A0001C793 /* leave@3x.png */,
+				180E83E52208673E0030F538 /* NotificationsViewController.h */,
+				180E83E62208673E0030F538 /* NotificationsViewController.m */,
+				180E83E8220867630030F538 /* NotificationTableViewCell.h */,
+				180E83E9220867630030F538 /* NotificationTableViewCell.m */,
+				180E83EB2208764C0030F538 /* NotificationDetailVC.h */,
+				180E83EC2208764C0030F538 /* NotificationDetailVC.m */,
+				182AF184220EACA4002A1539 /* ProjectDetailVC.h */,
+				182AF185220EACA4002A1539 /* ProjectDetailVC.m */,
+				182AF187220EB29E002A1539 /* LeadCollectionViewCell.h */,
+				182AF188220EB29E002A1539 /* LeadCollectionViewCell.m */,
+				182AF18A220EB2AD002A1539 /* TeamCollectionViewCell.h */,
+				182AF18B220EB2AD002A1539 /* TeamCollectionViewCell.m */,
+				1817939C221134A0009E006D /* TaskDetailVC.h */,
+				1817939D221134A0009E006D /* TaskDetailVC.m */,
 				1840C40D21F5D90C00383CB4 /* SWRevealViewController */,
 				1840C40321F5C89900383CB4 /* FTPopOverMenu */,
 				18272EF621F58D3800E573D7 /* MJPopup */,
@@ -1220,12 +1308,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180E83F922095BD00030F538 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				18BE2A2A21F9789300F5D55F /* VideoOverlay.png in Resources */,
 				18BE2A1821F9789300F5D55F /* UIBarButtonItemGrid@2x.png in Resources */,
 				18BE2A2721F9789300F5D55F /* PlayButtonOverlayLarge@2x.png in Resources */,
 				18BE2A1421F9789300F5D55F /* UIBarButtonItemArrowLeft.png in Resources */,
 				1815ED1421F59BA9006D63A0 /* close@3x.png in Resources */,
 				18187A2121F1A0EB007B1F09 /* SVProgressHUD.bundle in Resources */,
+				180E83FF22095BD00030F538 /* OpenSans-Semibold.ttf in Resources */,
 				1881F53521F1F92C0001C793 /* account.png in Resources */,
 				18BE2A1521F9789300F5D55F /* UIBarButtonItemGrid@3x.png in Resources */,
 				18BE2A3421F9789300F5D55F /* ImageSelectedSmallOn@2x.png in Resources */,
@@ -1243,6 +1333,8 @@
 				18F2C9D4220010CC0045484A /* oswald.bold.ttf in Resources */,
 				1818790D21F0B210007B1F09 /* Main.storyboard in Resources */,
 				18BE2A3121F9789300F5D55F /* PlayButtonOverlayLarge.png in Resources */,
+				180E83FD22095BD00030F538 /* OpenSans-ExtraBold.ttf in Resources */,
+				180E83E42208354D0030F538 /* GoogleService-Info.plist in Resources */,
 				18BE2A3021F9789300F5D55F /* ImageSelectedSmallOn@3x.png in Resources */,
 				18BE2A3221F9789300F5D55F /* ImageSelectedOn@3x.png in Resources */,
 				18BE2A1A21F9789300F5D55F /* ImageSelectedOff.png in Resources */,
@@ -1259,10 +1351,15 @@
 				18BE2A1F21F9789300F5D55F /* PlayButtonOverlayLargeTap.png in Resources */,
 				1881F52821F1DF1D0001C793 /* BebasNeue-Regular.otf in Resources */,
 				1840C41721F5F42E00383CB4 /* logo.png in Resources */,
+				180E83FE22095BD00030F538 /* OpenSans-LightItalic.ttf in Resources */,
 				182B816621FC66AB00302C87 /* send.png in Resources */,
+				180E840122095BD00030F538 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				180E83FA22095BD00030F538 /* OpenSans-Italic.ttf in Resources */,
 				182B816E21FC6A2C00302C87 /* SelectAreaViewController.xib in Resources */,
+				180E840022095BD00030F538 /* OpenSans-Bold.ttf in Resources */,
 				18BE2A2321F9789300F5D55F /* VideoOverlay@3x.png in Resources */,
 				1881F52921F1DF1D0001C793 /* BebasNeue-Thin.otf in Resources */,
+				180E83FB22095BD00030F538 /* OpenSans-Light.ttf in Resources */,
 				18BE2A2621F9789300F5D55F /* ImageSelectedOn.png in Resources */,
 				18BE2A1E21F9789300F5D55F /* ImageSelectedSmallOff@3x.png in Resources */,
 				18BE2A2421F9789300F5D55F /* ImageError.png in Resources */,
@@ -1270,6 +1367,8 @@
 				181879BB21F19CA2007B1F09 /* user.png in Resources */,
 				18BE2A2E21F9789300F5D55F /* PlayButtonOverlayLarge@3x.png in Resources */,
 				18BE2A2F21F9789300F5D55F /* UIBarButtonItemArrowRight@2x.png in Resources */,
+				180E83F822095BD00030F538 /* OpenSans-Regular.ttf in Resources */,
+				180E83FC22095BD00030F538 /* OpenSans-BoldItalic.ttf in Resources */,
 				18BE2A3921F979C600F5D55F /* loader.gif in Resources */,
 				18BE2A1621F9789300F5D55F /* ImageSelectedSmallOn.png in Resources */,
 				1840C41221F5DF4600383CB4 /* menu@3x.png in Resources */,
@@ -1314,20 +1413,26 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HRMSystem/Pods-HRMSystem-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-HRMSystem/Pods-HRMSystem-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HRMSystem/Pods-HRMSystem-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HRMSystem/Pods-HRMSystem-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		20E398258041E1111FBA0416 /* [CP] Check Pods Manifest.lock */ = {
@@ -1406,11 +1511,13 @@
 				1807202A21FC37B50012FC21 /* SRAlertView.m in Sources */,
 				18272EEC21F58D0F00E573D7 /* FSCalendarCollectionViewLayout.m in Sources */,
 				182B816921FC673700302C87 /* WorkSheetTableViewCell.m in Sources */,
+				180E840D2209B9240030F538 /* UIView+RoundedCorners.m in Sources */,
 				18BE2A1321F9789300F5D55F /* MWGridCell.m in Sources */,
 				1819FF2721F2F73D00170AE8 /* UIButton+WebCache.m in Sources */,
 				18272EE821F58D0F00E573D7 /* FSCalendarDelegationFactory.m in Sources */,
 				182B816D21FC6A2C00302C87 /* SelectAreaViewController.m in Sources */,
 				18BE2A0A21F9789300F5D55F /* DACircularProgressView.m in Sources */,
+				180E83EA220867630030F538 /* NotificationTableViewCell.m in Sources */,
 				1818793921F195B0007B1F09 /* LoginViewController.m in Sources */,
 				18BE2A0E21F9789300F5D55F /* UIImage+MWPhotoBrowser.m in Sources */,
 				18BE2A0D21F9789300F5D55F /* MWZoomingScrollView.m in Sources */,
@@ -1420,6 +1527,7 @@
 				18089A5D21FEFCC800AE792D /* EmployeesViewController.m in Sources */,
 				1840C41021F5D90C00383CB4 /* SWRevealViewController.m in Sources */,
 				18272EF021F58D0F00E573D7 /* FSCalendar+Deprecated.m in Sources */,
+				1817939E221134A0009E006D /* TaskDetailVC.m in Sources */,
 				181879C121F19F9B007B1F09 /* BaseViewController.m in Sources */,
 				18187A1E21F1A0EB007B1F09 /* SVProgressAnimatedView.m in Sources */,
 				18187A1221F1A023007B1F09 /* AFImageDownloader.m in Sources */,
@@ -1449,17 +1557,21 @@
 				18BE2A1221F9789300F5D55F /* MWGridViewController.m in Sources */,
 				18272EF321F58D0F00E573D7 /* FSCalendarHeaderView.m in Sources */,
 				1819FF1B21F2F73D00170AE8 /* UIImageView+HighlightedWebCache.m in Sources */,
+				182AF18F220EE93E002A1539 /* MemberInfoViewController.m in Sources */,
 				1819FF2421F2F73D00170AE8 /* NSData+ImageContentType.m in Sources */,
 				18272EF121F58D0F00E573D7 /* FSCalendarConstants.m in Sources */,
 				18BE2A4121F97D8600F5D55F /* FBShimmeringLayer.m in Sources */,
 				1819FF1C21F2F73D00170AE8 /* SDWebImageDownloader.m in Sources */,
 				181879CB21F19FC8007B1F09 /* Reachability.m in Sources */,
 				18272EFD21F58D3800E573D7 /* MJPopupBackgroundView.m in Sources */,
+				182AF189220EB29E002A1539 /* LeadCollectionViewCell.m in Sources */,
 				181879F321F1A01C007B1F09 /* AFNetworkReachabilityManager.m in Sources */,
+				180E840422097A5F0030F538 /* ProjectsVC.m in Sources */,
 				181879DC21F1A008007B1F09 /* MCLocalization.m in Sources */,
 				18BE2A4221F97D8600F5D55F /* FBShimmeringView.m in Sources */,
 				18BE2A0821F9789300F5D55F /* MBProgressHUD.m in Sources */,
 				1819FF1E21F2F73D00170AE8 /* UIImage+GIF.m in Sources */,
+				180E83E72208673E0030F538 /* NotificationsViewController.m in Sources */,
 				18272EC321F58B9D00E573D7 /* StoryboardExampleViewController.m in Sources */,
 				1840C41521F5EB4800383CB4 /* SideMViewController.m in Sources */,
 				1819FF2021F2F73D00170AE8 /* SDWebImageCompat.m in Sources */,
@@ -1477,10 +1589,12 @@
 				181879F421F1A01C007B1F09 /* AFSecurityPolicy.m in Sources */,
 				1840C41D21F6DC7A00383CB4 /* ListViewController.m in Sources */,
 				18187A0B21F1A023007B1F09 /* UIRefreshControl+AFNetworking.m in Sources */,
+				182AF186220EACA4002A1539 /* ProjectDetailVC.m in Sources */,
 				1819FF1F21F2F73D00170AE8 /* UIImage+MultiFormat.m in Sources */,
 				181879DE21F1A008007B1F09 /* MCLocalizationSingleJSONFileDataSource.m in Sources */,
 				18089A4B21FEC32B00AE792D /* DailyWorkSheetViewController.m in Sources */,
 				1819FF1D21F2F73D00170AE8 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
+				180E83ED2208764C0030F538 /* NotificationDetailVC.m in Sources */,
 				18089A5A21FEFC8F00AE792D /* EmployeesTableViewCell.m in Sources */,
 				18272EF221F58D0F00E573D7 /* FSCalendarCalculator.m in Sources */,
 				18272EEB21F58D0F00E573D7 /* FSCalendar.m in Sources */,
@@ -1494,6 +1608,7 @@
 				18BE2A0B21F9789300F5D55F /* MWPhotoBrowser.m in Sources */,
 				18187A0E21F1A023007B1F09 /* UIButton+AFNetworking.m in Sources */,
 				1819FF2121F2F73D00170AE8 /* SDWebImagePrefetcher.m in Sources */,
+				180E840722097EF50030F538 /* ProjectCell.m in Sources */,
 				18187A1D21F1A0EB007B1F09 /* SVRadialGradientLayer.m in Sources */,
 				181879EF21F1A01C007B1F09 /* AFURLResponseSerialization.m in Sources */,
 				1881F53821F1FAF50001C793 /* ApplyLeaveViewController.m in Sources */,
@@ -1508,6 +1623,7 @@
 				18BE2A1121F9789300F5D55F /* MWTapDetectingView.m in Sources */,
 				181879F021F1A01C007B1F09 /* AFHTTPSessionManager.m in Sources */,
 				18899C2F21F6F18E00C2FE80 /* AttendanceViewController.m in Sources */,
+				182AF18C220EB2AD002A1539 /* TeamCollectionViewCell.m in Sources */,
 				18BE29C421F83DA700F5D55F /* LeaveTypeCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

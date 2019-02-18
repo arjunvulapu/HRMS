@@ -41,7 +41,7 @@
     _menuTable.scrollEnabled=YES;
     companiesList=@[Localized(@"MY DETAILS"),Localized(@"CONTACT")];
 //    menuItems = @[Localized(@"MY SALES"),Localized(@"MY COMMISSIONS"),Localized(@"ACCOUNT"),Localized(@"LOGOUT")];
-    menuItems = @[Localized(@"MY DETAILS"),Localized(@"EMPLOYEE'S LIST"),Localized(@"TASK'S LIST"),Localized(@"WORK SHEET"),Localized(@"MY LEAVES"),Localized(@" MY ATTENDANCE"),Localized(@"HOLIDAYS"),Localized(@"APPLY LEAVE"),Localized(@"LOGOUT")];
+    menuItems = @[Localized(@"MY DETAILS"),Localized(@"NOTIFICATIONS"),Localized(@"PROJECTS"),Localized(@"EMPLOYEE'S LIST"),Localized(@"TASK'S LIST"),Localized(@"WORK SHEET"),Localized(@"MY LEAVES"),Localized(@" MY ATTENDANCE"),Localized(@"HOLIDAYS"),Localized(@"APPLY LEAVE"),Localized(@"LOGOUT")];
 
     menuItemImages = @[@"my-orders.png",@"wishlist-black.png", @"my-addresses.png", ];
     menuItems2 = @[Localized(@"CHAIRMAN & MD"),Localized(@"ABOUT US"), Localized(@"CONTACT US")];
@@ -58,7 +58,7 @@
         _emailLbl.text=[NSString stringWithFormat:@"%@",[dic valueForKey:@"email"]];
 //        _phoneLbl.text=[NSString stringWithFormat:@"%@",[dic valueForKey:@"phone"]];
         if([[dic valueForKey:@"hr"] isEqualToString:@"1"]){
-            menuItems = @[Localized(@"MY DETAILS"),Localized(@"EMPLOYEE'S LIST"),Localized(@"TASK'S LIST"),Localized(@"WORK SHEET"),Localized(@"MY LEAVES"),Localized(@"EMPLOYEE'S LEAVES"),Localized(@" MY ATTENDANCE"),Localized(@"HOLIDAYS"),Localized(@"APPLY LEAVE"),Localized(@"LOGOUT")];
+            menuItems = @[Localized(@"MY DETAILS"),Localized(@"NOTIFICATIONS"),Localized(@"PROJECTS"),Localized(@"EMPLOYEE'S LIST"),Localized(@"TASK'S LIST"),Localized(@"WORK SHEET"),Localized(@"MY LEAVES"),Localized(@"EMPLOYEE'S LEAVES"),Localized(@" MY ATTENDANCE"),Localized(@"HOLIDAYS"),Localized(@"APPLY LEAVE"),Localized(@"LOGOUT")];
         
         }
     }else{

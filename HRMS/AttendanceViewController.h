@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UICollectionView *attendanceCollectionView;
 @property (weak, nonatomic) IBOutlet UIButton *showingDateBtn;
 - (IBAction)showingDAteBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionviewHeight;
 
 @end
 

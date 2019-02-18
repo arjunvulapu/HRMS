@@ -17,5 +17,7 @@
 @property (strong, nonatomic) NSMutableArray * _Nullable datesShouldBeSelected;
 @property (strong, nonatomic) NSMutableArray * _Nonnull datesShouldNotBeSelected;
 @property (weak, nonatomic) IBOutlet UIView *backgroundview;
+//@property (strong,nonatomic) NSString *forEndDate;
+@property (strong,nonatomic) NSString *startDate;
 
 @end

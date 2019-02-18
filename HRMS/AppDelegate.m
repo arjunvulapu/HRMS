@@ -9,8 +9,12 @@
 #import "AppDelegate.h"
 #import "Utils.h"
 #import "Common.h"
-#import "IQKeyboardManager.h"
+@import Firebase;
+//#import "IQKeyboardManager.h"
+//#import "SMTKeyboardManager.h"
+#import "DailyWorkSheetViewController.h"
 #import "MainViewController.h"
+#import "WorkSheetViewController.h"
 @interface UIFont (SystemFontOverride)
 @end
 @implementation UIFont (SystemFontOverride)
@@ -19,19 +23,15 @@
 #pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 
 + (UIFont *)boldSystemFontOfSize:(CGFloat)fontSize {
-    if ([[Utils getLanguage] isEqualToString:KEY_LANGUAGE_AR]) {
+   
         return [UIFont fontWithName:@"Oswald-Light" size:fontSize];
-    }else{
-        return [UIFont fontWithName:@"Oswald-Light" size:fontSize];
-    }
+    
 }
 
 + (UIFont *)systemFontOfSize:(CGFloat)fontSize {
-    if ([[Utils getLanguage] isEqualToString:KEY_LANGUAGE_AR]) {
+
         return [UIFont fontWithName:@"Oswald-Light" size:fontSize];
-    }else{
-        return [UIFont fontWithName:@"Oswald-Light" size:fontSize];
-    }
+    
 }
 
 #pragma clang diagnostic pop
@@ -90,7 +90,7 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
+    [FIRApp configure];
     [OneSignal initWithLaunchOptions:launchOptions
                                appId:@"57b79a6c-3590-400a-b8ad-2eb00e8300cf"
             handleNotificationAction:nil
@@ -102,7 +102,9 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
     [OneSignal promptForPushNotificationsWithUserResponse:^(BOOL accepted) {
         NSLog(@"User accepted notifications: %d", accepted);
     }];
-    
+//    SMTKeyboardManager * keyboardManager = [SMTKeyboardManager sharedManager];
+//    [keyboardManager startKeyboardMonitoring];
+   // IQKeyboardManager.sharedManager.enable=YES;
     
     // Override point for customization after application launch.
 //    [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -119,15 +121,15 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
 
     
-//    for(NSString *fontfamilyname in [UIFont familyNames])
-//        {
-//            NSLog(@"family:'%@'",fontfamilyname);
-//            for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
-//            {
-//                NSLog(@"\tfont:'%@'",fontName);
-//            }
-//            NSLog(@"-------------");
-//        }
+    for(NSString *fontfamilyname in [UIFont familyNames])
+        {
+            NSLog(@"family:'%@'",fontfamilyname);
+            for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
+            {
+                NSLog(@"\tfont:'%@'",fontName);
+            }
+            NSLog(@"-------------");
+        }
     [[UITextField appearance] setTextColor:[UIColor whiteColor]];
     [[UITabBarItem appearance] setTitleTextAttributes:@{
                                                         NSFontAttributeName:[UIFont fontWithName:@"Oswald-Light" size:12.0f]
@@ -135,7 +137,7 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
     // Override point for customization after application launch.
         //[[UILabel appearance] setSubstituteFontName:@"Avenir Next Condensed"];
         [[UILabel appearance] setSubstituteFontName:@"Oswald-Light"];
-        [[UITextView appearance] setSubstituteFontName:@"Oswald-Light"];
+        [[UITextView appearance] setSubstituteFontName:@"OpenSans-Light"];
         
         [[UILabel appearance] setTextAlignment:NSTextAlignmentLeft];
         [[UITextField appearance] setTextAlignment:NSTextAlignmentLeft];
@@ -143,7 +145,7 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
         [[UIView appearance] setSemanticContentAttribute:UISemanticContentAttributeForceLeftToRight];
         [[UIButton appearance] titleLabel].font = [UIFont fontWithName:@"Oswald-Light" size:17];
         [UITextField appearance].font=[UIFont fontWithName:@"Oswald-Light" size:15];
-        [UITextView appearance].font=[UIFont fontWithName:@"Oswald-Light" size:15];
+        //[UITextView appearance].font=[UIFont fontWithName:@"OpenSans-Light" size:15];
         
         
     
@@ -206,7 +208,7 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
             [self.shareModel addResumeLocationToPList];
         }
     }
-    
+    [self downloadStringsFile];
     [OneSignal addSubscriptionObserver:self];
     return YES;
 }
@@ -330,6 +332,65 @@ BOOL isBold(UIFontDescriptor * fontDescriptor)
     [[NSUserDefaults standardUserDefaults] setValue:strDeviceToken forKey:@"TOKEN"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
-
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSLog(@"Called222");
+}
+- (void)downloadStringsFile {
+    if (![Utils isOnline]) {
+        [Utils showErrorAlertWithMessage:[MCLocalization stringForKey:@"internet_error"]];
+        return;
+    }
+    NSData *data2 = [NSData dataWithContentsOfURL:[Utils createURLForPage:WORDS withParameters:@{}]];
+    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data2 options:NSJSONReadingMutableContainers error:nil];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:nil];
+    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    NSURL *filePath = [documentsDirectoryURL URLByAppendingPathComponent:@"strings.json"];
+    NSLog(@"file: %@", filePath);
+    
+    [data writeToURL:filePath atomically:YES];
+    
+    [MCLocalization loadFromURL:filePath defaultLanguage:KEY_LANGUAGE_EN];
+    if ([[Utils getLanguage] length] != 0) {
+        [[MCLocalization sharedInstance] setLanguage:[Utils getLanguage]];
+        [[MCLocalization sharedInstance] reloadStrings];
+    }
+    [self downloadSettings];
+}
+- (void)downloadSettings {
+    if (![Utils isOnline]) {
+        [Utils showErrorAlertWithMessage:[MCLocalization stringForKey:@"internet_error"]];
+        return;
+    }
+    NSData *data2 = [NSData dataWithContentsOfURL:[Utils createURLForPage:SETTINGS withParameters:@{}]];
+    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data2 options:NSJSONReadingMutableContainers error:nil];
+    //    [[NSUserDefaults standardUserDefaults] setValue:dictionary forKey:@"SETTINGS"];
+    //    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
+    [currentDefaults setObject:data forKey:@"SETTINGS"];
+    
+}
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
+    if([[UIApplication sharedApplication] applicationState]!=UIApplicationStateActive){
+        NSLog(@"application:didReceiveRemoteNotification:fetchCompletionHandler: %@", userInfo);
+//        _fromPushOrNot=@"Push";
+        if([[[userInfo valueForKey:@"custom"] valueForKey:@"a"] valueForKey:@"type"]){
+            self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+            UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+            _fromPushNotification=@"YES";
+            _pushDict=[[userInfo valueForKey:@"custom"] valueForKey:@"a"];
+            self.window.rootViewController = viewController;
+            [self.window makeKeyAndVisible];
+        }
+    }
+    
+    completionHandler(nil);
+}
 @end

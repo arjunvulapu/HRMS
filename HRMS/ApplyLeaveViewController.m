@@ -147,6 +147,7 @@
     if(_startDateTxtField.text.length>0){
     StoryboardExampleViewController *vc = [[StoryboardExampleViewController alloc] initWithNibName:@"StoryboardExampleViewController" bundle:nil];
     vc.delegate=self;
+        vc.startDate=_startDateTxtField.text;
     //    [self.navigationController pushViewController:vc animated:YES];
     //vc.datesShouldBeSelected=[[NSUserDefaults standardUserDefaults] objectForKey:@"SELECTEDDATES"];
     vc.completionBlock = ^(NSString *datesList) {
@@ -156,6 +157,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:datesList forKey:@"SELECTEDDATES"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         // _chooseYourDateTxtField.text=[datesList componentsJoinedByString:@","];
+        
         self.endDateTxtField.text=datesList;
         self.dateFormatter1 = [[NSDateFormatter alloc] init];
         [ self.dateFormatter1 setDateFormat:@"dd-MM-yyyy"];

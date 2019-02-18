@@ -12,6 +12,41 @@
 #import "Utils.h"
 #import "Common.h"
 //#import <AMShimmer/AMShimmer-Swift.h>
+
+@interface UIColor(MBCategory)
+
++ (UIColor *)colorWithHex:(UInt32)col;
++ (UIColor *)colorWithHexString:(NSString *)str;
+
+@end
+
+//
+//  UIColor_Categories.m
+//
+//  Created by Matthias Bauch on 24.11.10.
+//  Copyright 2010 Matthias Bauch. All rights reserved.
+//
+
+
+@implementation UIColor(MBCategory)
+
+// takes @"#123456"
++ (UIColor *)colorWithHexString:(NSString *)str {
+    const char *cStr = [str cStringUsingEncoding:NSASCIIStringEncoding];
+    long x = strtol(cStr+1, NULL, 16);
+    return [UIColor colorWithHex:x];
+}
+
+// takes 0x123456
++ (UIColor *)colorWithHex:(UInt32)col {
+    unsigned char r, g, b;
+    b = col & 0xFF;
+    g = (col >> 8) & 0xFF;
+    r = (col >> 16) & 0xFF;
+    return [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:1];
+}
+
+@end
 @interface BaseViewController () <UIGestureRecognizerDelegate>
 
 @end
@@ -559,7 +594,16 @@ CAGradientLayer *gradient = [CAGradientLayer layer];
 gradient.frame = view.bounds;
 gradient.startPoint = CGPointMake(0, 0.5);
 gradient.endPoint = CGPointMake(0.5, 1);
+//    NSString *myString = @"0x084977";
+//
+//    UIColor *Color1 =UIColorFromRGB(0xff4433);
+//    UIColor *myColor =[UIColor colorWithHexString:<#(NSString *)#>]
+
+
 gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0.0/255.0 green:74/255.0 blue:115/255.0 alpha:1.0] CGColor],(id)[[UIColor colorWithRed:89/255.0 green:35.0/255.0 blue:119/255.0 alpha:1.0] CGColor], nil];
+//    UIColor *color1=[]
+//    gradient.colors = [NSArray arrayWithObjects:(id)[[] CGColor],(id)[[UIColor colorWithHexString:@"592176"] CGColor], nil];
+
 [view.layer addSublayer:gradient];
 }
 - (void) popVC {
@@ -570,5 +614,44 @@ gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0.0/255.0
     transition.subtype = kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
     [self.navigationController popViewControllerAnimated:NO];
+}
++ (UIColor *) colorFromHexString:(NSString *)hexString {
+    NSString *cleanString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
+    if([cleanString length] == 3) {
+        cleanString = [NSString stringWithFormat:@"%@%@%@%@%@%@",
+                       [cleanString substringWithRange:NSMakeRange(0, 1)],[cleanString substringWithRange:NSMakeRange(0, 1)],
+                       [cleanString substringWithRange:NSMakeRange(1, 1)],[cleanString substringWithRange:NSMakeRange(1, 1)],
+                       [cleanString substringWithRange:NSMakeRange(2, 1)],[cleanString substringWithRange:NSMakeRange(2, 1)]];
+    }
+    if([cleanString length] == 6) {
+        cleanString = [cleanString stringByAppendingString:@"ff"];
+    }
+    
+    unsigned int baseValue;
+    [[NSScanner scannerWithString:cleanString] scanHexInt:&baseValue];
+    
+    float red = ((baseValue >> 24) & 0xFF)/255.0f;
+    float green = ((baseValue >> 16) & 0xFF)/255.0f;
+    float blue = ((baseValue >> 8) & 0xFF)/255.0f;
+    float alpha = ((baseValue >> 0) & 0xFF)/255.0f;
+    
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
+
+-(void)addcellAnimation:(UITableViewCell*)cell
+{
+    cell.transform = CGAffineTransformMakeTranslation(0.f, 60);
+    cell.layer.shadowColor = [[UIColor blackColor]CGColor];
+    cell.layer.shadowOffset = CGSizeMake(10, 10);
+    cell.alpha = 0;
+    
+    //2. Define the final state (After the animation) and commit the animation
+    [UIView beginAnimations:@"rotation" context:NULL];
+    [UIView setAnimationDuration:1.5];
+    cell.transform = CGAffineTransformMakeTranslation(0.f, 0);
+    cell.alpha = 1;
+    cell.layer.shadowOffset = CGSizeMake(0, 0);
+    [UIView commitAnimations];
+    
 }
 @end

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *timeStamp;
 @property (weak, nonatomic) IBOutlet UILabel *addedName;
 @property (weak, nonatomic) IBOutlet UIImageView *addedImage;
+@property (weak, nonatomic) IBOutlet UITextView *commentForMsgTxtView;
 
 @property (weak, nonatomic) IBOutlet UIView *dateCellbackgroundview;
 @end

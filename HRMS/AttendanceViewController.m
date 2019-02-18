@@ -266,6 +266,7 @@
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition
 {
+    selectedDateInfo=[[NSDictionary alloc] init];
     if (![_datesShouldBeSelected containsObject:[self.dateFormatter1 stringFromDate:date]]) {
         self.dateFormatter1 = [[NSDateFormatter alloc] init];
         [ self.dateFormatter1 setDateFormat:@"dd-MM-yyyy"];
@@ -293,6 +294,7 @@
 }
 - (void)calendarCurrentPageDidChange:(FSCalendar *)calendar
 {
+    selectedDatestr=@"";
     NSInteger years = [_calanderView yearOfDate:_calanderView.currentPage];
     NSInteger month = [_calanderView monthOfDate:_calanderView.currentPage];
     [self makePostCallForPage:ATTENDANCE withParams:@{@"employee_code":[userdic valueForKey:@"employee_code"],@"month":[NSString stringWithFormat:@"%02ld",(long)month],@"year":[NSString stringWithFormat:@"%ld",(long)years]} withRequestCode:14];
@@ -408,24 +410,37 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if(selectedDatestr.length==0&&attendanceResult.count!=0){
-        return 7;
+    if(selectedDatestr.length==0||attendanceList.count==0){
+        if(attendanceResult.count!=0){
+            _collectionviewHeight.constant=30+30*6;
+            return 7;
+        }else{
+        return 0;
+        }
     }
     else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"Absent"])
     {
     // [self showErrorAlertWithMessage:[NSString stringWithFormat:@"On %@ Your Absent",[selectedDateInfo valueForKey:@"date"]]];
+        _collectionviewHeight.constant=30+30*6+30+30;
+
      return 1+1+7;
     }else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"Holiday"])
     {
      //[self showErrorAlertWithMessage:[NSString stringWithFormat:@"On %@ Company Have Holiday",[selectedDateInfo valueForKey:@"date"]]];
+        _collectionviewHeight.constant=30+30*6+30+30;
+
      return 1+1+7;
     }else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"WeeklyOff"])
     {
     // [self showErrorAlertWithMessage:[NSString stringWithFormat:@"On %@ Company Have WeeklyOff",[selectedDateInfo valueForKey:@"date"]]];
+        _collectionviewHeight.constant=30+30*6+30+30;
+
      return 1+1+7;
     }
    else  if([selectedDateInfo valueForKey:@"punch_records"]){
         NSMutableArray *puncRecords=[selectedDateInfo valueForKey:@"punch_records"];
+       _collectionviewHeight.constant=30+30*6+30+30+puncRecords.count*30/2;
+
         return puncRecords.count+3+7+1;
     }else{
         
@@ -457,7 +472,7 @@
         }else  if(indexPath.row==5){
             ccell.infoLbl.text=[NSString stringWithFormat:@"LOP/Day : %@%@",rupee,[hist valueForKey:@"approx_lop"]];
         }else if(indexPath.row==6){
-            ccell.infoLbl.text=[NSString stringWithFormat:@"LOP : %@%@",rupee,[NSString stringWithFormat:@"%d",[[hist valueForKey:@"approx_lop"] intValue]*[[hist valueForKey:@"absent"] intValue]]];
+            ccell.infoLbl.text=[NSString stringWithFormat:@"LOP : %@%@",rupee,[hist valueForKey:@"lop_amount"]];
 
         }else if(indexPath.row==7){
             ccell.infoLbl.text=[NSString stringWithFormat:@"ON %@",selectedDatestr];
@@ -529,7 +544,7 @@ else if([[selectedDateInfo valueForKey:@"status"] isEqualToString:@"Absent"])
     
      else
     if(indexPath.row<11){
-        return CGSizeMake(collectionView.frame.size.width/3.2, 30);
+        return CGSizeMake(collectionView.frame.size.width/3.5, 30);
     }else{
          return CGSizeMake((collectionView.frame.size.width-12)/2, 30);
     }

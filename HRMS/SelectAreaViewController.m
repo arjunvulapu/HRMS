@@ -11,7 +11,9 @@
 @interface SelectAreaViewController () <UITableViewDelegate, UITableViewDataSource>
 {
     NSMutableArray *projectList;
+    NSMutableArray *membersList;
     NSDictionary *selectedProject;
+    NSString *assignedTo;
 }
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -27,7 +29,9 @@
     [self addbackground:_bgView];
     self.areas = [[NSMutableArray alloc] init];
     self->projectList = [[NSMutableArray alloc] init];
-
+    NSMutableDictionary *dic=[[NSUserDefaults standardUserDefaults ]valueForKey:@"USER"];
+    _assignedToTxtFiled.text=[NSString stringWithFormat:@"%@ %@",[dic valueForKey:@"fname"],[dic valueForKey:@"lname"]];
+    assignedTo=[NSString stringWithFormat:@"%@",[dic valueForKey:@"id"]];
     self.projectNameTxtField.text=@"";
     self.taskTitle.text=@"";
     self.descriptionTxtView.text=@"";
@@ -57,7 +61,7 @@
         [dictionary setValue:self.restId forKey:@"rest_id"];
     }
     self.areas=_areasList;
-    [self makePostCallForPage:PROJECTS
+    [self makePostCallForPage:PROJECTSLIST
                    withParams:@{@"employee_id":[Utils loggedInUserIdStr]}
               withRequestCode:1];
     
@@ -70,7 +74,45 @@
 }
 
 - (void)parseResult:(id)result withCode:(int)reqeustCode {
+    if(reqeustCode==10){
+        membersList=result;
+        FTPopOverMenuConfiguration *configuration = [FTPopOverMenuConfiguration defaultConfiguration];
+        configuration.menuRowHeight = 40;
+        //configuration.menuWidth = self.view.frame.;
+        configuration.textColor = [UIColor blackColor];
+        configuration.textFont = [UIFont boldSystemFontOfSize:14];
+        configuration.tintColor = [UIColor whiteColor];
+        configuration.borderColor = [UIColor lightGrayColor];
+        configuration.borderWidth = 0.5;
+        configuration.textAlignment = UITextAlignmentCenter;
+        NSMutableArray *Item=[[NSMutableArray alloc] init];
+        
+        for(NSDictionary *dict in membersList){
+            [Item addObject:[NSString stringWithFormat:@"%@ %@",[dict valueForKey:@"fname"],[dict valueForKey:@"lname"]]];
+        }
+        
+        [FTPopOverMenu showForSender:_assignedBtn
+                       withMenuArray:Item
+                           doneBlock:^(NSInteger selectedIndex) {
+                               
+                               NSLog(@"done block. do something. selectedIndex : %ld", (long)selectedIndex);
+                               NSDictionary *dict = [self->membersList objectAtIndex:selectedIndex];
+                               
+                               _assignedToTxtFiled.text=[NSString stringWithFormat:@"%@ %@",[dict valueForKey:@"fname"],[dict valueForKey:@"lname"]];
+                               assignedTo=[NSString stringWithFormat:@"%@",[dict valueForKey:@"id"]];
+                           } dismissBlock:^{
+                               
+                               NSLog(@"user canceled. do nothing.");
+                               
+                               //                           FTPopOverMenuConfiguration *configuration = [FTPopOverMenuConfiguration defaultConfiguration];
+                               //                           configuration.allowRoundedArrow = !configuration.allowRoundedArrow;
+                               
+                           }];
+    }else{
+        
+    
     projectList=result;
+    }
 }
 
 - (void)close {
@@ -103,14 +145,14 @@
 //    Country *country = [self.areas objectAtIndex:indexPath.section];
 //    CountryArea *cat = [country.areas objectAtIndex:indexPath.row];
     NSMutableDictionary *dic=[self.areas objectAtIndex:indexPath.row];
-    if([dic objectForKey:@"title"] != nil){
-        if([[Utils getLanguage] isEqual:KEY_LANGUAGE_AR]){
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[self.areas objectAtIndex:indexPath.row] valueForKey:@"title_ar"]];
-        }else{
+//    if([dic objectForKey:@"title"] != nil){
+//        if([[Utils getLanguage] isEqual:KEY_LANGUAGE_AR]){
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[self.areas objectAtIndex:indexPath.row] valueForKey:@"title_ar"]];
+//        }else{
             cell.textLabel.text = [NSString stringWithFormat:@"%@",[[self.areas objectAtIndex:indexPath.row] valueForKey:@"title"]];
 
-        }
-}
+        //}
+//}
     return cell;
 }
 
@@ -165,7 +207,7 @@ NSMutableDictionary *str=[self.areas objectAtIndex:indexPath.row];
     NSMutableDictionary *dic =[[NSMutableDictionary alloc] init];
     [dic setValue:[selectedProject valueForKey:@"id"] forKey:@"project_id"];
     [dic setValue:[Utils loggedInUserIdStr] forKey:@"employee_id"];
-    [dic setValue:[Utils loggedInUserIdStr] forKey:@"assigned_to"];
+    [dic setValue:assignedTo forKey:@"assigned_to"];
 
     [dic setValue:_taskTitle.text forKey:@"title"];
     [dic setValue:_descriptionTxtView.text forKey:@"description"];
@@ -174,5 +216,9 @@ NSMutableDictionary *str=[self.areas objectAtIndex:indexPath.row];
 
 
     
+}
+- (IBAction)assignedToBtnAction:(id)sender {
+    [self makePostCallForPage:EMPLOYEEDETIALS withParams:@{} withRequestCode:10];
+
 }
 @end

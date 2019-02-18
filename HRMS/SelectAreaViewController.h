@@ -26,4 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addtaskBtn;
 - (IBAction)addtaskBtnAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
+@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *assignedToTxtFiled;
+@property (weak, nonatomic) IBOutlet UIButton *assignedBtn;
+- (IBAction)assignedToBtnAction:(id)sender;
 @end

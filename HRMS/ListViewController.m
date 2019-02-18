@@ -83,14 +83,7 @@
     NSDictionary *dict=[holidaysList objectAtIndex:indexPath.row];
     cell.leaveFromToLbl.text=[NSString stringWithFormat:@": %@",[dict valueForKey:@"date"]];
     cell.leaveStatus.text=[NSString stringWithFormat:@": %@",[dict valueForKey:@"cur_status"]];
-    if([[dict valueForKey:@"cur_status"] isEqualToString:@"Cancelled"]){
-        [cell.cancelBtn setHidden:YES];
-        cell.textViewBottom.constant=8;
-    }else{
-        [cell.cancelBtn setHidden:NO];
-        cell.textViewBottom.constant=46;
-
-    }
+    
     cell.leaveType.text=@"Leave Type";
     NSString *leaveRStr=[dict valueForKey:@"leave_type"];
     NSString *duRStr=[dict valueForKey:@"duration"];
@@ -114,7 +107,7 @@
     formatter=[[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd-MM-yyyy"];
     NSDate *today = [NSDate date]; // it will give you current date
-    NSDate *newDate = [formatter dateFromString:[dict valueForKey:@"start_date"]];
+    NSDate *newDate = [formatter dateFromString:[dict valueForKey:@"date"]];
     
     NSComparisonResult result;
     //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
@@ -133,7 +126,21 @@
         cell.leaveType.textColor=[UIColor lightGrayColor];
         cell.leaveTypeRLbl.textColor=[UIColor lightGrayColor];
         cell.descrptiontxView.textColor=[UIColor lightGrayColor];
+        
+        [cell.cancelBtn setHidden:YES];
+        cell.textViewBottom.constant=8;
     }else{
+        if([[dict valueForKey:@"cur_status"] isEqualToString:@"Cancelled"]){
+            [cell.cancelBtn setHidden:YES];
+            cell.textViewBottom.constant=8;
+        }else{
+            [cell.cancelBtn setHidden:NO];
+            cell.textViewBottom.constant=46;
+            
+        }
+//        [cell.cancelBtn setHidden:NO];
+//        cell.textViewBottom.constant=46;
+        
         cell.leaveFromToLbl.textColor=[UIColor blackColor];
         cell.leaveStatus.textColor=[UIColor blackColor];
         cell.leaveType.textColor=[UIColor blackColor];

@@ -82,10 +82,7 @@
 }
 
 + (NSTextAlignment) getAlignment {
-    if ([[[MCLocalization sharedInstance] language] isEqualToString:KEY_LANGUAGE_AR]) {
-        return NSTextAlignmentRight;
-    }
-    
+   
     return NSTextAlignmentLeft;
 }
 

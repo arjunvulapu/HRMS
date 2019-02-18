@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIButton *worksheetBtn;
 - (IBAction)workSheetBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property(nonatomic) void (^openWorkSheet)();
 @end
 

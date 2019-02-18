@@ -9,6 +9,13 @@ use_frameworks!
 pod 'IQKeyboardManager'
 pod 'JVFloatLabeledTextField'
 #pod 'AMShimmer'
+#pod 'SMTKeyboardManager'
+#pod 'MSSKeyboardManager'
+
+
+pod 'Firebase/Core'
+pod 'Firebase/Messaging'
+
 pod 'OneSignal', '>= 2.6.2', '< 3.0'
   target 'HRMSystemTests' do
     inherit! :search_paths

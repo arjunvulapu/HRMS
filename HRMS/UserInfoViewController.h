@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *emailRLbl;
 @property (weak, nonatomic) IBOutlet UILabel *addressLbl;
 @property (weak, nonatomic) IBOutlet UITextView *addressRLbl;
+@property (weak, nonatomic) IBOutlet UILabel *titleLbl;
 
 @end
 

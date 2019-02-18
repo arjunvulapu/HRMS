@@ -438,19 +438,7 @@
    [self.delegate cancelButtonClicked:self];
 }
 -(void)viewDidDisappear:(BOOL)animated{
-    if ([[Utils getLanguage] isEqualToString:KEY_LANGUAGE_AR]) {
-        [[UILabel appearance] setTextAlignment:NSTextAlignmentRight];
-        [[UITextField appearance] setTextAlignment:NSTextAlignmentRight];
-        
-        [[UITextView appearance] setTextAlignment:NSTextAlignmentRight];
-        [[UIView appearance] setSemanticContentAttribute:UISemanticContentAttributeForceRightToLeft];
-        [[UIButton appearance] titleLabel].font = [UIFont fontWithName:@"Hacen Tunisia Lt" size:17];
-        [UITextField appearance].font=[UIFont fontWithName:@"Hacen Tunisia Lt" size:17];
-        [UITextView appearance].font=[UIFont fontWithName:@"Hacen Tunisia Lt" size:17];
-        
-    } else {
-        //[[UILabel appearance] setSubstituteFontName:@"Avenir Next Condensed"];
-        
+  
         [[UILabel appearance] setTextAlignment:NSTextAlignmentLeft];
         [[UITextField appearance] setTextAlignment:NSTextAlignmentLeft];
         [[UITextView appearance] setTextAlignment:NSTextAlignmentLeft];
@@ -459,7 +447,7 @@
         [UITextField appearance].font=[UIFont fontWithName:@"Sansation-Regular" size:17];
         [UITextView appearance].font=[UIFont fontWithName:@"Sansation-Regular" size:17];
         
-    }
+    
 }
 @end
 

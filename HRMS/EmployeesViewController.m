@@ -9,6 +9,7 @@
 #import "EmployeesViewController.h"
 #import "EmployeesTableViewCell.h"
 #import "DailyWorkSheetViewController.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 @interface EmployeesViewController ()<UISearchBarDelegate>
 {
     NSMutableArray *employeesList,*searchEmployeesList;
@@ -62,7 +63,7 @@
     
     EmployeesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmployeesTableViewCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.worksheetBtn.layer.cornerRadius=10;
+    cell.worksheetBtn.layer.cornerRadius=5;
     cell.worksheetBtn.clipsToBounds=YES;
     cell.bgView.layer.cornerRadius=10;
     cell.bgView.clipsToBounds=YES;
@@ -74,11 +75,11 @@
 
      }
     
-    cell.employeeId.text=[NSString stringWithFormat:@": %@",[dict valueForKey:@"employee_code"]];
+    cell.employeeId.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"employee_code"]];
     
-    cell.employeeName.text=[NSString stringWithFormat:@": %@ %@",[dict valueForKey:@"fname"],[dict valueForKey:@"lname"]];
-    cell.emailLbl.text=[NSString stringWithFormat:@": %@",[dict valueForKey:@"email"]];
-    cell.designationLbl.text=[NSString stringWithFormat:@": %@",[dict valueForKey:@"designation"]];
+    cell.employeeName.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"designation"]];
+    cell.emailLbl.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"company_email"]];
+    cell.designationLbl.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"phone"]];
     cell.openWorkSheet = ^{
         DailyWorkSheetViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"DailyWorkSheetViewController"];
         controller.addedBy=[Utils loggedInUserIdStr];
@@ -89,7 +90,20 @@
         [self.navigationController pushViewController:controller animated:YES];
     };
     
+    NSString *fullStr=[NSString stringWithFormat:@"%@ %@(%@)",[dict valueForKey:@"fname"],[dict valueForKey:@"lname"],[dict valueForKey:@"employee_code"]];
+    NSString *nameStr=[NSString stringWithFormat:@"%@ %@",[dict valueForKey:@"fname"],[dict valueForKey:@"lname"]];
+    NSMutableAttributedString * string = [[NSMutableAttributedString alloc] initWithString:fullStr];
+    [string addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(nameStr.length,fullStr.length-nameStr.length)];
+    [cell.userImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[dict valueForKey:@"image"]]] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    cell.userImage.layer.cornerRadius=cell.userImage.frame.size.width/2;
+    cell.userImage.clipsToBounds=YES;
     
+    [cell.employeeId setAttributedText:string];
+    cell.employeeId.textAlignment=NSTextAlignmentCenter;
+    cell.employeeName.textAlignment=NSTextAlignmentCenter;
+    cell.emailLbl.textAlignment=NSTextAlignmentCenter;
+    cell.designationLbl.textAlignment=NSTextAlignmentCenter;
+
     return cell;
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{

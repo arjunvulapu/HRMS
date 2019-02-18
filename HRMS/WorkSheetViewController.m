@@ -16,6 +16,7 @@
 {
     NSMutableArray *tasksList;
     NSString *chageStr;
+    UIRefreshControl *refreshControl;
 }
 @property (weak, nonatomic) IBOutlet UITableView *taskTableView;
 @property (weak, nonatomic) IBOutlet UIButton *addnewTaskBtn;
@@ -28,6 +29,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor clearColor];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(refreshTheChat)
+                  forControlEvents:UIControlEventValueChanged];
+    _taskTableView.refreshControl=self.refreshControl;
     [self addbackground:self.bgView];
     _addnewTaskBtn.layer.cornerRadius=10;
     _addnewTaskBtn.clipsToBounds=YES;
@@ -36,10 +45,34 @@
     self.navigationController.navigationBar.translucent =YES;
     [self makePostCallForPage:TASKLIST withParams:@{@"employee_id":[Utils loggedInUserIdStr]} withRequestCode:10];
 }
+-(void)refreshTheChat{
+    [self makePostCallForPage:TASKLIST withParams:@{@"employee_id":[Utils loggedInUserIdStr]} withRequestCode:10];
+
+}
+- (void)reloadData
+{
+    // Reload table data
+    [self.taskTableView reloadData];
+    
+    // End the refreshing
+    if (self.refreshControl) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                    forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+        
+        [self.refreshControl endRefreshing];
+    }
+}
 -(void)parseResult:(id)result withCode:(int)reqeustCode{
     NSLog(@"%@",result);
 
     if(reqeustCode==10){
+        tasksList=[[NSMutableArray alloc] init];
         tasksList=result;
         _taskTableView.reloadData;
     }else if(reqeustCode==100){

@@ -9,11 +9,13 @@
 #import "HRListViewController.h"
 #import "AppliedLeavesTableViewCell.h"
 #import "SRAlertView/SRAlertView.h"
+#import "FTPopOverMenu/FTPopOverMenu.h"
 @interface HRListViewController ()
 {
     NSMutableArray *holidaysList;
     NSString *cancelStr;
     NSString *hrSelctedType;
+    NSMutableArray *leaveTypes;
 
 }
 @end
@@ -28,9 +30,10 @@
     // Do any additional setup after loading the view.
     holidaysList=[[NSMutableArray alloc] init];
     [self addbackground:self.backgroundView];
-    
-    
-    [self makePostCallForPage:HRLEAVES withParams:@{@"employee_id":[Utils loggedInUserIdStr]} withRequestCode:10];
+    leaveTypes=[[NSMutableArray alloc] init];
+    [self makePostCallForPage:LEAVETYPES withParams:@{@"employee_id":[Utils loggedInUserIdStr],} withRequestCode:12];
+
+//    [self makePostCallForPage:HRLEAVES withParams:@{@"employee_id":[Utils loggedInUserIdStr]} withRequestCode:10];
 }
 -(void)parseResult:(id)result withCode:(int)reqeustCode{
     if(reqeustCode==10){
@@ -41,10 +44,12 @@
             NSString *str=[result valueForKey:@"message"];
             [self showErrorAlertWithMessage:Localized(str)];
         } else {
-            [self makePostCallForPage:HRLEAVEACTION withParams:@{@"employee_id":[Utils loggedInUserIdStr]} withRequestCode:10];
- 
+            [self FetchonceAgain];
         }
 
+    }else if(reqeustCode==12){
+        leaveTypes=result;
+        [self makePostCallForPage:HRLEAVES withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"status":@"0"} withRequestCode:10];
     }
 
 }
@@ -193,16 +198,17 @@
     };
     cell.acceptBtnAction = ^{
         self->cancelStr=[NSString stringWithFormat:@"%@",[dict valueForKey:@"id"]];
-        self->hrSelctedType=@"accept";
-
-        SRAlertView *alertView = [SRAlertView sr_alertViewWithTitle:@"HRMSystem"
-                                                               icon:nil
-                                                            message:@"Please Conform To Accept"
-                                                    leftActionTitle:@"Sure"
-                                                   rightActionTitle:@"Cancel"
-                                                     animationStyle:SRAlertViewAnimationZoomSpring
-                                                           delegate:self];
-        [alertView show];
+//        self->hrSelctedType=@"accept";
+//
+//        SRAlertView *alertView = [SRAlertView sr_alertViewWithTitle:@"HRMSystem"
+//                                                               icon:nil
+//                                                            message:@"Please Conform To Accept"
+//                                                    leftActionTitle:@"Sure"
+//                                                   rightActionTitle:@"Cancel"
+//                                                     animationStyle:SRAlertViewAnimationZoomSpring
+//                                                           delegate:self];
+//        [alertView show];
+        [self changeStatus:cell.acceptBtn];
         
     };
     cell.hrCancelBtnAction  = ^{
@@ -219,6 +225,45 @@
         [alertView show];
     };
     return cell;
+}
+-(void)changeStatus:(id)sender{
+//    NSMutableArray *statusList=[NSMutableArray arrayWithObjects:@"Casual Leave",@"LOP",@"Sick Leave", nil];
+    FTPopOverMenuConfiguration *configuration = [FTPopOverMenuConfiguration defaultConfiguration];
+    configuration.menuRowHeight = 40;
+    configuration.menuWidth = 120;
+    configuration.textColor = [UIColor blackColor];
+    configuration.textFont = [UIFont boldSystemFontOfSize:14];
+    configuration.tintColor = [UIColor whiteColor];
+    configuration.borderColor = [UIColor lightGrayColor];
+    configuration.borderWidth = 0.5;
+    configuration.textAlignment = UITextAlignmentCenter;
+    NSMutableArray *Item=[[NSMutableArray alloc] init];
+    
+    for(NSDictionary *LDic in leaveTypes){
+        [Item addObject:[LDic valueForKey:@"title"]];
+    }
+    
+    [FTPopOverMenu showForSender:sender
+                   withMenuArray:Item
+                       doneBlock:^(NSInteger selectedIndex) {
+                           
+                           NSLog(@"done block. do something. selectedIndex : %ld", (long)selectedIndex);
+                           //                           self->selectedProject = [self->projectList objectAtIndex:selectedIndex];
+//                           //                           self->_projectNameTxtField.text=[self->selectedProject valueForKey:@"title"];
+//                           [self makePostCallForPage:TASKAPPROVE withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"task_id":chageStr,@"status":[NSString stringWithFormat:@"%ld",(long)selectedIndex]} withRequestCode:100];
+                           NSDictionary *LtypeDic=[leaveTypes objectAtIndex:selectedIndex];
+                           [self makePostCallForPage:HRLEAVEACTION withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_id":self->cancelStr,@"status":@"1",@"leave_type":[NSString stringWithFormat:@"%@",[LtypeDic valueForKey:@"id"]]} withRequestCode:11];
+
+                           
+                       } dismissBlock:^{
+                           
+                           NSLog(@"user canceled. do nothing.");
+                           
+                           //                           FTPopOverMenuConfiguration *configuration = [FTPopOverMenuConfiguration defaultConfiguration];
+                           //                           configuration.allowRoundedArrow = !configuration.allowRoundedArrow;
+                           
+                       }];
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -244,9 +289,24 @@ clickedButtonAtIndex:(NSInteger) buttonIndex{
         if([hrSelctedType isEqual:@"cancel"]){
             [self makePostCallForPage:HRLEAVEACTION withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_id":cancelStr,@"status":@"2"} withRequestCode:11];
         }else{
-            [self makePostCallForPage:HRLEAVEACTION withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_id":cancelStr,@"status":@"1"} withRequestCode:11];
+//            [self makePostCallForPage:HRLEAVEACTION withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"leave_id":cancelStr,@"status":@"1"} withRequestCode:11];
 
         }
+    }
+}
+-(void)FetchonceAgain{
+    if(_statusSegment.selectedSegmentIndex==0){
+        [self makePostCallForPage:HRLEAVES withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"status":@"0"} withRequestCode:10];
+        
+    }else if(_statusSegment.selectedSegmentIndex==1){
+        [self makePostCallForPage:HRLEAVES withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"status":@"1"} withRequestCode:10];
+        
+    }else if(_statusSegment.selectedSegmentIndex==2){
+        [self makePostCallForPage:HRLEAVES withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"status":@"2"} withRequestCode:10];
+        
+    }else if(_statusSegment.selectedSegmentIndex==3){
+        [self makePostCallForPage:HRLEAVES withParams:@{@"employee_id":[Utils loggedInUserIdStr],@"status":@"3"} withRequestCode:10];
+        
     }
 }
 - (IBAction)statusSegmentAction:(id)sender {

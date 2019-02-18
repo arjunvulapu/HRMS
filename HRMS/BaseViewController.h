@@ -55,5 +55,7 @@
 - (BOOL)validateEmailWithString:(NSString*)email;
 
 -(void)addbackground:(UIView*)view;
+
+-(void)addcellAnimation:(UITableViewCell*)cell;
 - (void) popVC;
 @end

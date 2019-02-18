@@ -17,13 +17,18 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>ToGet Your Location</string>
+	<string>ToGet Current Location of the User</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>ToGet Your Location</string>
+	<string>ToGet Current Location of the User</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BebasNeue-Bold.otf</string>
@@ -34,11 +39,22 @@
 		<string>oswald.bold.ttf</string>
 		<string>oswald.light.ttf</string>
 		<string>oswald.regular.ttf</string>
+		<string>OpenSans-Bold.ttf</string>
+		<string>OpenSans-BoldItalic</string>
+		<string>OpenSans-ExtraBold</string>
+		<string>OpenSans-ExtraBoldItalic.ttf</string>
+		<string>OpenSans-Light.ttf</string>
+		<string>OpenSans-Italic.ttf</string>
+		<string>OpenSans-LightItalic.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>OpenSans-Semibold.ttf</string>
+		<string>OpenSans-SemiboldItalic.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
 		<string>location</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

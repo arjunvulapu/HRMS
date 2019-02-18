@@ -16,5 +16,8 @@
 @property (strong, nonatomic) UIWindow *window;
 - (void)afterLoginSucess;
 - (void)afterLoginLogOut;
+@property (strong, nonatomic) NSString *fromPushNotification;
+@property (strong, nonatomic) NSDictionary *pushDict;
+
 @end
 

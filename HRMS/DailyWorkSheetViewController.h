@@ -22,6 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *workSheetTitle;
 @property (weak, nonatomic) NSString *Fname;
 @property (weak, nonatomic) NSString *Lname;
+@property (weak, nonatomic) NSString *from;
+
+@property (weak, nonatomic) IBOutlet UIView *commentView;
+@property (weak, nonatomic) IBOutlet UIButton *commentBtn;
+- (IBAction)commentBtnAction:(id)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *msgViewTop;
+@property (weak, nonatomic) IBOutlet UILabel *commentLbl;
 
 @end
 

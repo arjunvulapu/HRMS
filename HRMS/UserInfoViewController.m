@@ -17,6 +17,8 @@
 #import "WorkSheetViewController.h"
 #import "DailyWorkSheetViewController.h"
 #import "EmployeesViewController.h"
+#import "NotificationsViewController.h"
+#import "ProjectsVC.h"
 @interface UserInfoViewController ()<SWRevealViewControllerDelegate>
 {
     NSMutableDictionary *UserInfoDict;
@@ -30,6 +32,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"%@",[APP_DELEGATE fromPushNotification]);
+    if([[APP_DELEGATE fromPushNotification] isEqual:@"YES"]){
+        NSDictionary *pushDic=[APP_DELEGATE pushDict];
+        if([[pushDic valueForKey:@"type"] isEqualToString:@"worksheet"]){
+        DailyWorkSheetViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"DailyWorkSheetViewController"];
+        NSMutableDictionary *dic=[[NSUserDefaults standardUserDefaults ]valueForKey:@"USER"];
+
+        controller.addedBy=[Utils loggedInUserIdStr];
+        controller.whosWorksheet=[pushDic valueForKey:@"type_id"];
+
+        controller.Fname=[dic valueForKey:@"fname"];
+        controller.Lname=[dic valueForKey:@"lname"];
+        
+        [self.navigationController pushViewController:controller animated:YES];
+        }
+        else if([[pushDic valueForKey:@"type"] isEqualToString:@"general"]){
+            NotificationsViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"NotificationsViewController"];
+            
+            [self.navigationController pushViewController:controller animated:YES];
+        }else if([[pushDic valueForKey:@"type"] isEqualToString:@"leaves"]){
+            ListViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ListViewController"];
+            controller.from=@"holidays";
+            [self.navigationController pushViewController:controller animated:YES];
+        }else if([[pushDic valueForKey:@"type"] isEqualToString:@"tasks"]){
+            WorkSheetViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkSheetViewController"];
+            
+            [self.navigationController pushViewController:controller animated:YES];
+            
+        }
+    }
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage=[UIImage new];
     self.navigationController.navigationBar.translucent =YES;
@@ -43,7 +75,7 @@
     _BackScrollVew.clipsToBounds=YES;
     _backView.layer.cornerRadius=15;
     _backView.clipsToBounds=YES;
-    
+    self.titleLbl.text=Localized(@"DIGITAL ID");
     self.imageView.layer.cornerRadius = self.imageView.frame.size.height/2;
     self.imageView.clipsToBounds = YES;
     self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -108,11 +140,23 @@
                 
             }else if([selectedId isEqual:@1]){
                 self.tabBarController.tabBar.hidden=YES;
+                NotificationsViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"NotificationsViewController"];
+                
+                [self.navigationController pushViewController:controller animated:YES];
+                
+            }else if([selectedId isEqual:@3]){
+                self.tabBarController.tabBar.hidden=YES;
                 EmployeesViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"EmployeesViewController"];
                 
                 [self.navigationController pushViewController:controller animated:YES];
                 
             }else if([selectedId isEqual:@2]){
+                self.tabBarController.tabBar.hidden=YES;
+                ProjectsVC  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ProjectsVC"];
+                
+                [self.navigationController pushViewController:controller animated:YES];
+                
+            }else if([selectedId isEqual:@4]){
                 self.tabBarController.tabBar.hidden=YES;
                 WorkSheetViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"WorkSheetViewController"];
                
@@ -120,7 +164,7 @@
                 
             }
         
-            else if([selectedId isEqual:@3]){
+            else if([selectedId isEqual:@5]){
                 self.tabBarController.tabBar.hidden=YES;
                 DailyWorkSheetViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"DailyWorkSheetViewController"];
                 controller.addedBy=[Utils loggedInUserIdStr];
@@ -131,38 +175,38 @@
                 [self.navigationController pushViewController:controller animated:YES];
               
             }
-            else if([selectedId isEqual:@4]){
+            else if([selectedId isEqual:@6]){
                 self.tabBarController.tabBar.hidden=YES;
                 ListViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ListViewController"];
                 controller.from=@"holidays";
                 [self.navigationController pushViewController:controller animated:YES];
                 
             }
-           else if([selectedId isEqual:@5]&&[[dic valueForKey:@"hr"] isEqualToString:@"1"]){
+           else if([selectedId isEqual:@7]&&[[dic valueForKey:@"hr"] isEqualToString:@"1"]){
                 self.tabBarController.tabBar.hidden=YES;
                 HRListViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HRListViewController"];
                 
                 [self.navigationController pushViewController:controller animated:YES];
                 
-           } else if([selectedId isEqual:@(5+forhr)]){
+           } else if([selectedId isEqual:@(7+forhr)]){
                self.tabBarController.tabBar.hidden=YES;
                AttendanceViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AttendanceViewController"];
                
                [self.navigationController pushViewController:controller animated:YES];
                
            }
-            else if([selectedId isEqual:@(6+forhr)]){
+            else if([selectedId isEqual:@(8+forhr)]){
                 //[self.tabBarController setSelectedIndex:1];
                 HolidaysListViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HolidaysListViewController"];
                 
                 [self.navigationController pushViewController:controller animated:YES];
             }
-            else if([selectedId isEqual:@(7+forhr)]){
+            else if([selectedId isEqual:@(9+forhr)]){
                 //[self.tabBarController setSelectedIndex:2];
                 ApplyLeaveViewController  *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ApplyLeaveViewController"];
                 
                 [self.navigationController pushViewController:controller animated:YES];
-            }else if([selectedId isEqual:@(8+forhr)]){
+            }else if([selectedId isEqual:@(10+forhr)]){
                 [Utils logoutUser];
                 NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
                 [defaults setObject:nil forKey:@"USER"];
@@ -196,6 +240,7 @@
 }
 -(void)parseResult:(id)result withCode:(int)reqeustCode{
     if(reqeustCode==12){
+        if(result[0]){
         UserInfoDict = result[0];
         NSString *fullStr=[NSString stringWithFormat:@"%@ %@(%@)",[UserInfoDict valueForKey:@"fname"],[UserInfoDict valueForKey:@"lname"],[UserInfoDict valueForKey:@"employee_code"]];
         NSString *nameStr=[NSString stringWithFormat:@"%@ %@",[UserInfoDict valueForKey:@"fname"],[UserInfoDict valueForKey:@"lname"]];
@@ -208,7 +253,7 @@
         _nameLbl.textAlignment=NSTextAlignmentCenter;
         _role.text=[NSString stringWithFormat:@"%@",[UserInfoDict valueForKey:@"designation"]];
         _numberRLBl.text=[NSString stringWithFormat:@"%@",[UserInfoDict valueForKey:@"phone"]];
-        _emailRLbl.text=[NSString stringWithFormat:@"%@",[UserInfoDict valueForKey:@"email"]];
+        _emailRLbl.text=[NSString stringWithFormat:@"%@",[UserInfoDict valueForKey:@"company_email"]];
         _addressRLbl.text=[NSString stringWithFormat:@"%@",[UserInfoDict valueForKey:@"address"]];
 //        [_userImage setImageWithURL:[UserInfoDict valueForKey:@"image"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [_imageView setImageWithURL:[UserInfoDict valueForKey:@"image"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -221,7 +266,12 @@
         NSString *deviceToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"TOKEN"]:@"";
         NSString *playerID = [[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]?[[NSUserDefaults standardUserDefaults] valueForKey:@"player_id"]:@"";
         [self makePostCallForPage:PAGE_REGISTER_TOKEN withParams:@{@"device_token":deviceToken,@"player_id":playerID,@"employee_id":[Utils loggedInUserIdStr],@"device_type":@"0"} withRequestCode:100];
-    }else if(reqeustCode==100){
+    
+    }else{
+        [APP_DELEGATE afterLoginLogOut];
+    }
+    }
+        else if(reqeustCode==100){
         NSLog(@"token registerd");
     }
 }
